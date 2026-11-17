@@ -234,7 +234,7 @@ function showResult() {
   elements.checklistView.classList.add("is-hidden");
   elements.resultView.classList.remove("is-hidden");
   elements.header.classList.add("is-hidden");
-  elements.footer.classList.add("is-hidden");
+  elements.footer.classList.remove("is-hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -293,3 +293,379 @@ renderQuestion();
 if (window.lucide) {
   window.lucide.createIcons();
 }
+
+
+// GENERATOR SITASI AI - ETHICAI
+
+(() => {
+
+  const citationForm = document.getElementById("citationForm");
+
+  if (!citationForm) return;
+
+  // Mengambil elemen HTML
+  const previewContent = document.getElementById("previewContent");
+  const resultContent = document.getElementById("resultContent");
+
+  const citationText = document.getElementById("citationText");
+  const resultFormat = document.getElementById("resultFormat");
+  const usageNote = document.getElementById("usageNote");
+
+  const copyButton = document.getElementById("copyCitation");
+  const regenerateButton = document.getElementById("regenerateCitation");
+
+  const copyNotification = document.getElementById("copyNotification");
+  const notificationText = document.getElementById("notificationText");
+  const notificationCaption = document.getElementById("notificationCaption");
+
+  // Memastikan elemen HTML tersedia
+  if (
+    !previewContent ||
+    !resultContent ||
+    !citationText ||
+    !resultFormat ||
+    !usageNote ||
+    !copyButton ||
+    !regenerateButton ||
+    !copyNotification ||
+    !notificationText
+  ) {
+    console.error("Elemen Generator Sitasi belum lengkap.");
+    return;
+  }
+
+  // Tampilan awal: panel hijau terlihat
+  previewContent.hidden = false;
+  resultContent.hidden = true;
+  copyNotification.hidden = true;
+
+  if (notificationCaption) {
+    notificationCaption.hidden = true;
+  }
+
+  // Mengambil data form
+  function getFormData() {
+
+    const selectedFormat = citationForm.querySelector(
+      'input[name="citationFormat"]:checked'
+    );
+
+    return {
+      toolName: document.getElementById("toolName").value.trim(),
+      developer: document.getElementById("developer").value.trim(),
+      version: document.getElementById("version").value.trim(),
+      date: document.getElementById("usageDate").value,
+      purpose: document.getElementById("purpose").value.trim(),
+      url: document.getElementById("toolUrl").value.trim(),
+      format: selectedFormat ? selectedFormat.value : "APA"
+    };
+
+  }
+
+  // Format tanggal Indonesia
+  function formatIndonesianDate(date) {
+
+    const dateObject = new Date(date + "T00:00:00");
+
+    return dateObject.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+
+  }
+
+  // Format tanggal IEEE
+  function formatEnglishDate(date) {
+
+    const dateObject = new Date(date + "T00:00:00");
+
+    return dateObject.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+
+  }
+
+  // Membuat sitasi APA
+  function generateAPA(data) {
+
+    const year = data.date.slice(0, 4);
+    const author = data.developer || data.toolName;
+
+    const toolInformation = data.version
+      ? `${data.toolName} (${data.version})`
+      : data.toolName;
+
+    let citation =
+      `${author}. (${year}). ${toolInformation} [Large language model].`;
+
+    if (data.url) {
+      citation += ` ${data.url}`;
+    }
+
+    return citation;
+
+  }
+
+  // Membuat sitasi IEEE
+  function generateIEEE(data) {
+
+    const year = data.date.slice(0, 4);
+    const author = data.developer || data.toolName;
+
+    const toolInformation = data.version
+      ? `${data.toolName} (${data.version})`
+      : data.toolName;
+
+    const accessDate = formatEnglishDate(data.date);
+
+    let citation =
+      `[1] ${author}, "${toolInformation}," ${year}. [Online].`;
+
+    if (data.url) {
+      citation += ` Available: ${data.url}.`;
+    }
+
+    citation += ` [Accessed: ${accessDate}].`;
+
+    return citation;
+
+  }
+
+  // Proses membuat sitasi
+  function createCitation() {
+
+    if (!citationForm.reportValidity()) {
+      return;
+    }
+
+    const data = getFormData();
+
+    let result = "";
+
+    if (data.format === "APA") {
+      result = generateAPA(data);
+    } else {
+      result = generateIEEE(data);
+    }
+
+    // Menampilkan hasil sitasi
+    citationText.value = result;
+
+    resultFormat.textContent =
+      `FORMAT ${data.format} · CONTOH BERDASARKAN INPUT`;
+
+    usageNote.textContent =
+      `Catatan penggunaan: ${formatIndonesianDate(data.date)}; ${data.purpose}`;
+
+    // PANEL HIJAU HILANG
+    previewContent.hidden = true;
+
+    // CARD HASIL PUTIH MUNCUL
+    resultContent.hidden = false;
+
+    // Menyembunyikan notifikasi sebelumnya
+    copyNotification.hidden = true;
+
+    if (notificationCaption) {
+      notificationCaption.hidden = true;
+    }
+
+  }
+
+  // Tombol Generate Citation
+  citationForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+    createCitation();
+
+  });
+
+  // Tombol Regenerate
+  regenerateButton.addEventListener("click", function() {
+
+    createCitation();
+
+  });
+
+  // Tombol Copy Citation
+  copyButton.addEventListener("click", async function() {
+
+    const text = citationText.value.trim();
+
+    if (!text) return;
+
+    try {
+
+      if (navigator.clipboard && window.isSecureContext) {
+
+        await navigator.clipboard.writeText(text);
+
+      } else {
+
+        const temporaryInput = document.createElement("textarea");
+
+        temporaryInput.value = text;
+        temporaryInput.style.position = "fixed";
+        temporaryInput.style.opacity = "0";
+
+        document.body.appendChild(temporaryInput);
+
+        temporaryInput.select();
+
+        const copied = document.execCommand("copy");
+
+        temporaryInput.remove();
+
+        if (!copied) {
+          throw new Error("Gagal menyalin sitasi");
+        }
+
+      }
+
+      notificationText.textContent =
+        "Berhasil disalin ke clipboard";
+
+    } catch (error) {
+
+      notificationText.textContent =
+        "Gagal menyalin. Silakan salin secara manual.";
+
+    }
+
+    // Menampilkan notifikasi
+    copyNotification.hidden = false;
+
+    if (notificationCaption) {
+      notificationCaption.hidden = false;
+    }
+
+  });
+
+  // Tombol Reset Form
+  citationForm.addEventListener("reset", function() {
+
+    setTimeout(function() {
+
+      citationText.value = "";
+      resultFormat.textContent = "";
+      usageNote.textContent = "";
+
+      // PANEL HIJAU MUNCUL KEMBALI
+      previewContent.hidden = false;
+
+      // CARD HASIL PUTIH HILANG
+      resultContent.hidden = true;
+
+      // Menyembunyikan notifikasi
+      copyNotification.hidden = true;
+
+      if (notificationCaption) {
+        notificationCaption.hidden = true;
+      }
+
+    }, 0);
+
+  });
+
+})();
+
+// NAVIGASI generatos sitasi tambahan
+
+(() => {
+
+  const checklistView = document.getElementById("checklistView");
+  const resultView = document.getElementById("resultView");
+  const generatorView = document.getElementById("generator");
+
+  const checklistNav = document.getElementById("checklistNav");
+  const generatorNav = document.getElementById("generatorNav");
+
+  const header = document.getElementById("siteHeader");
+  const footer = document.getElementById("siteFooter");
+
+  // Pastikan elemen tersedia
+  if (
+    !checklistView ||
+    !resultView ||
+    !generatorView ||
+    !checklistNav ||
+    !generatorNav
+  ) {
+    return;
+  }
+
+  // Fungsi menampilkan halaman
+  function openPage(page) {
+
+    checklistView.classList.toggle(
+      "is-hidden",
+      page !== "checklist"
+    );
+
+    resultView.classList.add("is-hidden");
+
+    generatorView.classList.toggle(
+      "is-hidden",
+      page !== "generator"
+    );
+
+    // Menampilkan header dan footer
+    header?.classList.remove("is-hidden");
+    footer?.classList.remove("is-hidden");
+
+    // Mengatur menu aktif
+    checklistNav.classList.toggle(
+      "active",
+      page === "checklist"
+    );
+
+    generatorNav.classList.toggle(
+      "active",
+      page === "generator"
+    );
+
+    // Memperbarui alamat halaman
+    history.replaceState(
+      null,
+      "",
+      page === "generator" ? "#generator" : "#checklist"
+    );
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+  // Mengatur navigasi menggunakan capture
+  // agar tidak bentrok dengan event sementara temanmu.
+  document.addEventListener("click", function(event) {
+
+    const link = event.target.closest(
+      'a[href="#generator"], a[href="#checklist"]'
+    );
+
+    if (!link) return;
+
+    const destination = link.getAttribute("href");
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (destination === "#generator") {
+
+      openPage("generator");
+
+    } else if (destination === "#checklist") {
+
+      openPage("checklist");
+
+    }
+
+  }, true);
+
+})();

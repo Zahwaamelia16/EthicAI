@@ -20,7 +20,7 @@
     <nav class="main-nav" aria-label="Navigasi utama">
       <a href="#top">Beranda</a>
       <a href="#panduan">Panduan Etika AI</a>
-      <a class="active" href="#checklist">Checklist AI</a>
+      <a class="active" href="#checklist" id="checklistNav" >Checklist AI</a>
       <a href="#generator" id="generatorNav">Generator</a>
       <a href="#tentang">Tentang</a>
     </nav>
@@ -163,6 +163,293 @@
         </aside>
       </div>
     </section>
+
+    <!-- BAGIAN GENERATOR SITASI AI -->
+<section class="citation-generator page-view is-hidden" id="generator">
+
+  <div class="citation-container">
+
+    <!-- JUDUL HALAMAN -->
+    <div class="citation-intro">
+      <p class="citation-eyebrow">MAKE YOUR PROCESS VISIBLE</p>
+      <h1>AI Citation Generator</h1>
+      <p>Catat sumber bantuan AI dengan jelas. Pilih format sitasi yang sesuai kebutuhanmu.</p>
+    </div>
+
+    <!-- TAB GENERATOR -->
+    <div class="citation-tabs">
+      <a href="#declaration" class="citation-tab">
+        AI Declaration Generator
+      </a>
+
+      <a href="#generator" class="citation-tab active">
+        AI Citation Generator
+      </a>
+    </div>
+
+    <div class="citation-layout">
+
+      <!-- BAGIAN KIRI: FORM INPUT -->
+      <form class="citation-form" id="citationForm">
+
+        <p class="citation-step">01 / INFORMASI SITASI</p>
+        <h2>Detail tool AI</h2>
+        <p class="citation-required">* Informasi wajib diisi</p>
+
+        <!-- NAMA TOOL -->
+        <div class="citation-field">
+          <label for="toolName">Nama tools AI *</label>
+          <input
+            type="text"
+            id="toolName"
+            placeholder="Contoh: ChatGPT"
+            required
+          />
+          <small>Gunakan nama resmi tool</small>
+        </div>
+
+        <!-- PENGEMBANG DAN VERSI -->
+        <div class="citation-row">
+
+          <div class="citation-field">
+            <label for="developer">Pengembang / penyedia</label>
+            <input
+              type="text"
+              id="developer"
+              placeholder="Contoh: OpenAI"
+            />
+            <small>Jika diketahui</small>
+          </div>
+
+          <div class="citation-field">
+            <label for="version">Versi / model</label>
+            <input
+              type="text"
+              id="version"
+              placeholder="Contoh: GPT-4o"
+            />
+            <small>Jika tersedia</small>
+          </div>
+
+        </div>
+
+        <!-- TANGGAL -->
+        <div class="citation-field">
+          <label for="usageDate">Tanggal penggunaan *</label>
+          <input
+            type="date"
+            id="usageDate"
+            required
+          />
+          <small>Tanggal saat tool digunakan</small>
+        </div>
+
+        <!-- TUJUAN -->
+        <div class="citation-field">
+          <label for="purpose">Tujuan penggunaan AI *</label>
+          <textarea
+            id="purpose"
+            rows="2"
+            placeholder="Jelaskan konteks penggunaan..."
+            required
+          ></textarea>
+          <small>Disimpan sebagai catatan transparansi</small>
+        </div>
+
+        <!-- URL -->
+        <div class="citation-field">
+          <label for="toolUrl">URL resmi tool (opsional)</label>
+          <input
+            type="url"
+            id="toolUrl"
+            placeholder="https://contoh.com"
+          />
+          <small>Masukkan tautan resmi tool AI</small>
+        </div>
+
+        <!-- FORMAT SITASI -->
+        <div class="citation-field">
+          <label>Format sitasi *</label>
+
+          <div class="citation-format">
+
+            <label class="format-option">
+              <input
+                type="radio"
+                name="citationFormat"
+                value="APA"
+                checked
+              />
+              <span>APA</span>
+            </label>
+
+            <label class="format-option">
+              <input
+                type="radio"
+                name="citationFormat"
+                value="IEEE"
+              />
+              <span>IEEE</span>
+            </label>
+
+          </div>
+
+          <small>Periksa pedoman kampus untuk format yang diminta</small>
+        </div>
+
+        <!-- TOMBOL FORM -->
+        <div class="citation-buttons">
+          <button type="submit" class="citation-generate">
+            Generate Citation ↗
+          </button>
+
+          <button type="reset" class="citation-reset">
+            Reset Form
+          </button>
+        </div>
+
+      </form>
+
+
+      
+
+<!-- BAGIAN KANAN: PREVIEW DAN HASIL SITASI -->
+<div class="citation-result-area">
+
+  <!-- TAMPILAN AWAL: PREVIEW HIJAU -->
+  <section class="citation-preview-card" id="previewContent">
+
+    <p class="citation-step">
+      02 / DOCUMENT PREVIEW
+    </p>
+
+    <h2>
+      Credit the tool<br>
+      Own the thinking
+    </h2>
+
+    <p class="preview-description">
+      Sitasi membantu pembaca mengenali tool yang kamu gunakan.
+      Informasi model, tanggal, dan pedoman institusi menentukan
+      detail penulisannya.
+    </p>
+
+    <div class="preview-steps">
+      <p>01 / Nama pengembang dan tool</p>
+      <p>02 / Tahun dan versi atau model</p>
+      <p>03 / Format APA atau IEEE</p>
+    </div>
+
+    <p class="preview-footer">
+      Isi form di samping untuk menyiapkan hasilmu.
+    </p>
+
+  </section>
+
+
+  <!-- TAMPILAN SETELAH GENERATE: CARD HASIL -->
+  <section class="citation-result-card" id="resultContent" hidden>
+
+    <p class="citation-step">
+      02 / HASIL GENERATOR
+    </p>
+
+    <h2>Sitasi penggunaan AI</h2>
+
+    <p class="citation-format-label" id="resultFormat">
+      FORMAT APA · CONTOH BERDASARKAN INPUT
+    </p>
+
+    <div class="citation-output">
+
+      <textarea
+        id="citationText"
+        rows="3"
+        aria-label="Hasil sitasi"
+        spellcheck="false"
+      ></textarea>
+
+      <p id="usageNote" class="citation-usage-note"></p>
+
+    </div>
+
+    <p class="citation-edit-hint">
+      EDITABLE TEXT / Sesuaikan dengan prosesmu
+    </p>
+
+    <div class="citation-result-buttons">
+
+      <button
+        type="button"
+        class="citation-copy"
+        id="copyCitation"
+      >
+        Copy Citation
+      </button>
+
+      <button
+        type="button"
+        class="citation-regenerate"
+        id="regenerateCitation"
+      >
+        Regenerate
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- NOTIFIKASI SETELAH COPY -->
+  <div
+    class="citation-notification"
+    id="copyNotification"
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+
+    <span>✓</span>
+
+    <p id="notificationText">
+      Berhasil disalin ke clipboard
+    </p>
+
+  </div>
+
+  <p
+    class="citation-notification-caption"
+    id="notificationCaption"
+    hidden
+  >
+    Contoh tampilan notifikasi setelah menyalin hasil
+  </p>
+
+
+  <!-- CATATAN PENTING -->
+  <div class="citation-note">
+
+    <p class="citation-step">
+      PENTING / PEDOMAN TETAP UTAMA
+    </p>
+
+    <p>
+      Format sitasi dan deklarasi dapat berbeda sesuai pedoman
+      kampus, dosen, jurnal, atau institusi. Hasil generator perlu
+      ditinjau dan tidak otomatis sesuai seluruh kebijakan akademik.
+    </p>
+
+    <small>
+      Contoh ini memakai tahun penggunaan dari input, bukan
+      verifikasi tanggal rilis model. Periksa metadata, URL,
+      dan aturan format sebelum digunakan.
+    </small>
+
+  </div>
+
+</div>
+
+    
   </main>
 
   <footer class="site-footer" id="siteFooter">
@@ -189,3 +476,4 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
+
