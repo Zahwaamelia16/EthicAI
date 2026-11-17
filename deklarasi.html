@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EthicAI - AI Declaration Generator untuk menyusun pernyataan transparansi penggunaan AI dalam tugas akademik." />
+  <title>AI Declaration Generator | EthicAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@1.73.0" defer></script>
+  <script src="deklarasi.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="index.html" aria-label="EthicAI beranda">EthicAI</a>
+
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a href="index.html#top">Beranda</a>
+      <a href="index.html#panduan">Panduan Etika AI</a>
+      <a href="index.html#checklist">Checklist AI</a>
+      <a class="active" href="deklarasi.html" id="generatorNav">Generator</a>
+      <a href="index.html#tentang">Tentang</a>
+    </nav>
+
+    <a class="header-cta" href="index.html#checklist">Mulai Sekarang
+      <i data-lucide="arrow-up-right" class="icon-inline" aria-hidden="true"></i>
+    </a>
+  </header>
+
+  <main id="top">
+    <section class="decl-page" aria-labelledby="declPageTitle">
+      <!-- HEADER HALAMAN -->
+      <div class="decl-intro content-width">
+        <p class="eyebrow">MAKE YOUR PROCESS VISIBLE</p>
+        <h1 id="declPageTitle">AI Declaration Generator</h1>
+        <p class="intro-copy">Ceritakan peran AI dalam tugasmu. Jelas, terbuka, dan tetap menjadi karyamu.</p>
+      </div>
+
+      <!-- TAB SWITCHER (Terkunci di atas untuk semua tampilan) -->
+      <div class="content-width">
+        <div class="decl-tabs" role="tablist" aria-label="Pilih jenis generator">
+          <a href="deklarasi.html" class="decl-tab is-active" role="tab" aria-selected="true">
+            AI Declaration Generator
+          </a>
+          <a href="sitasi.html" class="decl-tab" role="tab" aria-selected="false">
+            AI Citation Generator
+          </a>
+        </div>
+      </div>
+
+      <!-- KONTEN UTAMA 2 KOLOM -->
+      <div class="decl-layout content-width">
+        <!-- KOLOM KIRI: FORM INPUT -->
+        <section class="decl-form-card" aria-label="Form detail penggunaan AI">
+          <p class="decl-step-label">01 / CERITAKAN PROSESMU</p>
+          <h2>Detail penggunaan AI</h2>
+          <p class="decl-required-note">* Informasi wajib diisi</p>
+
+          <form id="declarationForm">
+            <div class="decl-field">
+              <label for="aiTools">Nama tools AI *</label>
+              <input
+                type="text"
+                id="aiTools"
+                placeholder="Contoh: ChatGPT, Gemini, Midjourney"
+                required
+              />
+              <small>Cantumkan seluruh tool yang berkontribusi</small>
+            </div>
+
+            <div class="decl-field">
+              <label for="aiPurpose">Tujuan penggunaan AI *</label>
+              <textarea
+                id="aiPurpose"
+                rows="2"
+                placeholder="Jelaskan tujuan penggunaan AI..."
+                required
+              ></textarea>
+              <small>Mengapa kamu menggunakan tool ini?</small>
+            </div>
+
+            <div class="decl-field">
+              <label for="aiAssistance">Bentuk bantuan AI *</label>
+              <input
+                type="text"
+                id="aiAssistance"
+                placeholder="Contoh: brainstorming, penyuntingan..."
+                required
+              />
+              <small>Jelaskan bantuan, bukan hanya nama tool</small>
+            </div>
+
+            <div class="decl-field">
+              <label for="taskPart">Bagian tugas yang dibantu AI *</label>
+              <input
+                type="text"
+                id="taskPart"
+                placeholder="Sebutkan bagian tugas yang dibantu..."
+                required
+              />
+              <small>Tentukan bagian atau tahap pengerjaannya</small>
+            </div>
+
+            <div class="decl-field">
+              <label for="humanReview">Pemeriksaan dan pengeditan hasil *</label>
+              <textarea
+                id="humanReview"
+                rows="3"
+                placeholder="Ceritakan proses verifikasi dan revisimu..."
+                required
+              ></textarea>
+              <small>Jelaskan bagaimana kamu meninjau hasil AI</small>
+            </div>
+
+            <div class="decl-form-actions">
+              <button class="button button-coral decl-btn-full" type="submit">
+                Generate Declaration
+                <i data-lucide="arrow-up-right" class="icon-inline" aria-hidden="true"></i>
+              </button>
+              <button class="button button-outline decl-btn-full" id="resetBtn" type="button">
+                Reset Form
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- KOLOM KANAN: PREVIEW / HASIL & PEDOMAN -->
+        <aside class="decl-side-column" aria-label="Pratinjau dan hasil deklarasi AI">
+          <!-- STATE 1: SEBELUM GENERATE -->
+          <div class="decl-preview-card" id="emptyStateCard">
+            <p class="side-eyebrow">02 / DOCUMENT PREVIEW</p>
+            <h2>Your process,<br />clearly stated</h2>
+            <p class="side-copy">
+              Deklarasi yang baik menjelaskan bantuan AI sekaligus menunjukkan kendali dan tanggung jawab manusia.
+            </p>
+
+            <ol class="steps-list">
+              <li><span>01 /</span> Tool dan tujuan penggunaan</li>
+              <li><span>02 /</span> Bentuk bantuan pada tugas</li>
+              <li><span>03 /</span> Verifikasi dan tanggung jawab</li>
+            </ol>
+
+            <p class="decl-preview-foot">Isi form di samping untuk menyiapkan hasilmu</p>
+          </div>
+
+          <!-- STATE 2: SETELAH GENERATE -->
+          <div class="decl-result-card is-hidden" id="resultStateCard" aria-live="polite">
+            <p class="decl-step-label">02 / HASIL GENERATOR</p>
+            <h2>Deklarasi penggunaan AI</h2>
+            <p class="decl-result-sub">DEKLARASI PRIBADI · OTOMATIS BERDASARKAN INPUT</p>
+
+            <div class="decl-editable-box" id="declarationOutput" contenteditable="true" spellcheck="false">
+              <!-- Teks hasil deklarasi akan muncul di sini -->
+            </div>
+
+            <p class="decl-edit-hint">
+              <strong>EDITABLE TEXT</strong> / Klik teks di atas untuk menyesuaikan dengan prosesmu
+            </p>
+
+            <div class="decl-result-actions">
+              <button class="button button-coral" id="copyBtn" type="button">Copy Declaration</button>
+              <button class="button button-outline" id="regenerateBtn" type="button">Regenerate</button>
+            </div>
+          </div>
+
+          <!-- NOTIFIKASI COPY -->
+          <div class="decl-copy-badge is-hidden" id="copyBadge" role="status" aria-live="polite">
+            <i data-lucide="check" class="icon-inline" aria-hidden="true"></i>
+            <span>Berhasil disalin ke clipboard</span>
+          </div>
+
+          <!-- KOTAK PEDOMAN -->
+          <div class="decl-disclaimer-card">
+            <p class="decl-step-label">PENTING / PEDOMAN TETAP UTAMA</p>
+            <p class="decl-disclaimer-main">
+              Format sitasi dan deklarasi dapat berbeda sesuai pedoman kampus, dosen, jurnal, atau institusi. Hasil generator perlu ditinjau dan tidak otomatis sesuai seluruh kebijakan akademik.
+            </p>
+            <p class="decl-disclaimer-sub">
+              Jangan masukkan data pribadi atau materi tugas yang bersifat rahasia.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-grid content-width">
+      <div class="footer-brand-block">
+        <a class="brand footer-brand" href="index.html#top">EthicAI</a>
+        <p>Panduan kecil untuk tanggung jawab yang besar<br />Belajar, periksa, dan ungkapkan penggunaan AI-mu</p>
+        <small>© 2026 EthicAI · Learn with integrity</small>
+      </div>
+      <div class="footer-links">
+        <p class="side-eyebrow">JELAJAHI</p>
+        <a href="index.html#panduan">Panduan Etika AI</a>
+        <a href="index.html#checklist">Checklist AI</a>
+        <a href="deklarasi.html">Generator</a>
+        <a href="index.html#tentang">Tentang EthicAI</a>
+      </div>
+      <div class="footer-academic">
+        <p class="side-eyebrow">UNTUK DUNIA AKADEMIK</p>
+        <p>Dibuat untuk mahasiswa dan pelajar.<br />Bukan pengganti kebijakan dosen atau institusi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
