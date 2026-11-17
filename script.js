@@ -544,6 +544,7 @@ if (window.lucide) {
 
   });
 
+  
   // Tombol Reset Form
   citationForm.addEventListener("reset", function() {
 
