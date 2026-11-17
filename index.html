@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EthicAI - AI Transparency Checklist untuk mengevaluasi penggunaan AI dalam tugas akademik." />
+  <title>Checklist AI | EthicAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@1.73.0" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#top" aria-label="EthicAI beranda">EthicAI</a>
+
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a href="#top">Beranda</a>
+      <a href="#panduan">Panduan Etika AI</a>
+      <a class="active" href="#checklist">Checklist AI</a>
+      <a href="#generator" id="generatorNav">Generator</a>
+      <a href="#tentang">Tentang</a>
+    </nav>
+
+    <a class="header-cta" href="#checklist">Mulai Sekarang
+<i data-lucide="arrow-up-right" class="icon-inline" aria-hidden="true"></i></a>
+  </header>
+
+  <main id="top">
+    <!-- BAGIAN CHECKLIST -->
+    <section class="checklist-page page-view" id="checklistView" aria-labelledby="pageTitle">
+      <div class="page-intro content-width">
+        <p class="eyebrow">A MOMENT TO REFLECT</p>
+        <h1 id="pageTitle">AI Transparency Checklist</h1>
+        <p class="intro-copy">Periksa kembali bagaimana kamu menggunakan AI dalam tugas akademik.</p>
+        <p class="meta-line">5 PERTANYAAN <span>/</span> ± 2 MENIT <span>/</span> TANPA AKUN</p>
+      </div>
+
+      <div class="checklist-layout content-width" id="checklist">
+        <section class="question-card" aria-label="Pertanyaan checklist AI">
+          <div class="progress-area">
+            <div class="progress-meta">
+              <span id="progressText">0 dari 5 pertanyaan terjawab</span>
+              <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-track"
+                 id="progressTrack"
+                 role="progressbar"
+                 aria-label="Progress checklist"
+                 aria-valuemin="0"
+                 aria-valuemax="5"
+                 aria-valuenow="0">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <div class="question-content" aria-live="polite">
+            <p class="card-heading">Jujur pada proses belajarmu</p>
+            <p class="question-number" id="questionNumber">01 / TRANSPARANSI</p>
+            <h2 class="question-title" id="questionTitle">Apakah kamu mencantumkan penggunaan AI dalam tugas?</h2>
+            <p class="question-description" id="questionDescription">Sebutkan tool dan bentuk bantuan AI secara jelas.</p>
+
+            <fieldset class="answer-options">
+              <legend class="sr-only">Pilih jawaban</legend>
+              <label class="answer-option" id="yesOption">
+                <input type="radio" name="answer" value="yes" />
+                <span class="radio-mark" aria-hidden="true"></span>
+                <span>Ya</span>
+              </label>
+              <label class="answer-option" id="noOption">
+                <input type="radio" name="answer" value="no" />
+                <span class="radio-mark" aria-hidden="true"></span>
+                <span>Tidak</span>
+              </label>
+            </fieldset>
+          </div>
+
+          <div class="question-actions">
+            <button class="button button-outline button-small" id="backButton" type="button" disabled>Kembali</button>
+            <button class="button button-coral button-small" id="nextButton" type="button" disabled>Lanjut</button>
+          </div>
+
+          <p class="helper-text" id="helperText">Jawab seluruh pertanyaan untuk melihat ringkasan evaluasi</p>
+        </section>
+
+        <aside class="before-card" aria-label="Petunjuk sebelum mulai">
+          <p class="side-eyebrow">SEBELUM MULAI</p>
+          <h2>Bukan tentang sempurna<br />Tentang jujur</h2>
+          <p class="side-copy">Pilih jawaban yang paling sesuai dengan proses pengerjaan tugasmu saat ini.</p>
+
+          <ol class="steps-list">
+            <li><span>01 /</span> Ingat tugas yang sedang kamu kerjakan</li>
+            <li><span>02 /</span> Tinjau bantuan AI yang kamu gunakan</li>
+            <li><span>03 /</span> Jadikan hasil sebagai langkah perbaikan</li>
+          </ol>
+
+          <div class="important-note">
+            <p class="side-eyebrow">PENTING</p>
+            <p>Checklist ini adalah evaluasi mandiri, bukan sertifikasi kepatuhan akademik atau pemeriksaan plagiarisme.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BAGIAN HASIL CHECKLIST -->
+    <section class="result-page page-view is-hidden" id="resultView" aria-labelledby="resultTitle">
+      <div class="result-intro content-width">
+        <p class="eyebrow">YOUR TRANSPARENCY REVIEW</p>
+        <h1 id="resultTitle">Lebih sadar. Lebih bertanggung jawab</h1>
+        <p class="intro-copy">Lihat kembali prosesmu, lalu perbaiki hal yang masih terlewat.</p>
+        <p class="meta-line">HASIL EVALUASI MANDIRI <span>·</span> BERDASARKAN JAWABANMU</p>
+      </div>
+
+      <div class="result-layout content-width">
+        <section class="result-card" aria-label="Ringkasan hasil evaluasi">
+          <p class="result-label">RINGKASAN EVALUASI</p>
+
+          <div class="score-row">
+            <div class="score-block">
+              <p class="score-number" id="scoreNumber">80%</p>
+              <p class="score-caption" id="scoreCaption">4 dari 5 jawaban “Ya”</p>
+            </div>
+            <div class="score-description">
+              <h2 id="scoreHeading">Sudah baik,<br />masih bisa ditingkatkan</h2>
+              <p id="scoreDescription">Kamu telah menerapkan sebagian besar kebiasaan transparansi AI. Pastikan penggunaan AI juga sesuai aturan tugasmu.</p>
+            </div>
+          </div>
+
+          <div class="improvement-section" id="improvementSection">
+            <p class="result-label">PRIORITAS PERBAIKAN</p>
+            <div class="improvement-list" id="improvementList"></div>
+          </div>
+
+          <div class="done-section">
+            <h3>Yang sudah kamu lakukan</h3>
+            <ul class="done-list" id="doneList"></ul>
+          </div>
+
+          <div class="result-actions">
+            <button class="button button-coral button-wide" id="declarationButton" type="button">Buat Deklarasi AI
+<i data-lucide="arrow-up-right" class="icon-inline" aria-hidden="true"></i></button>
+            <button class="button button-outline button-wide" id="restartButton" type="button">Ulangi Checklist</button>
+          </div>
+
+          <p class="disclaimer">Hasil ini merupakan evaluasi mandiri, bukan sertifikasi kepatuhan akademik. Nilai yang diperoleh tidak menggantikan izin atau penilaian dosen.</p>
+        </section>
+
+        <aside class="next-card" aria-label="Langkah selanjutnya">
+          <p class="side-eyebrow">NEXT, MAKE IT CLEAR</p>
+          <h2>Prosesmu layak diceritakan</h2>
+          <p>Setelah meninjau penggunaan AI, buat deklarasi singkat untuk menjelaskan kontribusi tool dan pemeriksaan yang kamu lakukan.</p>
+          <p class="learn-line">
+            <span>LEARN</span>
+            <i data-lucide="arrow-right" class="icon-inline"></i>
+            <span>CHECK</span>
+            <i data-lucide="arrow-right" class="icon-inline"></i>
+            <span>DECLARE</span>
+          </p>
+          <p class="next-small">Tetap bertanggung jawab atas seluruh isi dan keakuratan tugas akhir.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-grid content-width">
+      <div class="footer-brand-block">
+        <a class="brand footer-brand" href="#top">EthicAI</a>
+        <p>Panduan kecil untuk tanggung jawab yang besar<br />Belajar, periksa, dan ungkapkan penggunaan AI-mu</p>
+        <small>© 2026 EthicAI · Learn with integrity</small>
+      </div>
+      <div class="footer-links">
+        <p class="side-eyebrow">JELAJAHI</p>
+        <a href="#panduan">Panduan Etika AI</a>
+        <a href="#checklist">Checklist AI</a>
+        <a href="#generator">Generator</a>
+        <a href="#tentang">Tentang EthicAI</a>
+      </div>
+      <div class="footer-academic">
+        <p class="side-eyebrow">UNTUK DUNIA AKADEMIK</p>
+        <p>Dibuat untuk mahasiswa dan pelajar.<br />Bukan pengganti kebijakan dosen atau institusi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
