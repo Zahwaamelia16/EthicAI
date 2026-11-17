@@ -22,7 +22,7 @@ body {
   font-size: 14px;
   line-height: 1.7;
 }
-button, input { font: inherit; }
+button, input, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; }
 
@@ -510,8 +510,9 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   content: none !important;
 }
 
-
-/* GENERATOR SITASI AI - ETHICAI */
+/* =========================================================
+   GENERATOR SITASI AI - ETHICAI
+   ========================================================= */
 
 .citation-generator {
   padding: 69px 0 62px;
@@ -520,7 +521,6 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   font-family: var(--font);
 }
 
-/* Memastikan elemen hidden tidak tampil */
 .citation-generator [hidden] {
   display: none !important;
 }
@@ -530,7 +530,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   margin-inline: auto;
 }
 
-/*JUDUL GENERATOR */
+/* JUDUL GENERATOR */
 
 .citation-intro {
   margin-bottom: 26px;
@@ -559,7 +559,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   font-size: 13px;
 }
 
-/*TAB GENERATOR */
+/* TAB GENERATOR */
 
 .citation-tabs {
   display: grid;
@@ -592,7 +592,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   background: var(--green);
 }
 
-/*LAYOUT UTAMA */
+/* LAYOUT UTAMA */
 
 .citation-layout {
   display: grid;
@@ -632,7 +632,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   font-size: 10px;
 }
 
-/* Kolom input */
+/* KOLOM INPUT */
 
 .citation-field {
   display: flex;
@@ -691,7 +691,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   font-size: 9px;
 }
 
-/* Pengembang dan versi */
+/* PENGEMBANG DAN VERSI */
 
 .citation-row {
   display: grid;
@@ -788,7 +788,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   background: var(--pale);
 }
 
-/*PANEL KANAN */
+/* PANEL KANAN */
 
 .citation-result-area {
   display: flex;
@@ -797,7 +797,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   min-width: 0;
 }
 
-/*TAMPILAN AWAL - PREVIEW HIJAU */
+/* TAMPILAN AWAL - PREVIEW HIJAU */
 
 .citation-preview-card {
   min-width: 0;
@@ -846,7 +846,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   line-height: 1.7;
 }
 
-/*TAMPILAN SETELAH GENERATE - CARD PUTIH */
+/* TAMPILAN SETELAH GENERATE - CARD PUTIH */
 
 .citation-result-card {
   min-width: 0;
@@ -875,7 +875,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   font-weight: 500;
 }
 
-/* Kotak hasil sitasi */
+/* KOTAK HASIL SITASI */
 
 .citation-output {
   min-width: 0;
@@ -1015,10 +1015,9 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   line-height: 1.8;
 }
 
-/* TAMPILAN RESPONSIVE - TABLET */
+/* RESPONSIVE TABLET */
 
 @media (max-width: 900px) {
-
   .citation-layout {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 18px;
@@ -1037,15 +1036,11 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   .citation-result-card h2 {
     font-size: 22px;
   }
-
 }
 
-/* ==========================================
-   TAMPILAN RESPONSIVE - HP
-========================================== */
+/* RESPONSIVE HP */
 
 @media (max-width: 700px) {
-
   .citation-generator {
     padding: 48px 0 45px;
   }
@@ -1087,13 +1082,11 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   .citation-result-card h2 {
     font-size: 23px;
   }
-
 }
 
-/*TAMPILAN RESPONSIVE - HP KECIL */
+/* RESPONSIVE HP KECIL */
 
 @media (max-width: 480px) {
-
   .citation-row {
     grid-template-columns: 1fr;
     gap: 0;
@@ -1107,10 +1100,9 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   .citation-result-buttons {
     grid-template-columns: 1fr;
   }
-
 }
 
-/* PLACEHOLDER AWAL JIKA DIPERLUKAN */
+/* PLACEHOLDER AWAL */
 
 .citation-placeholder {
   padding: 20px;
@@ -1123,7 +1115,8 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   text-align: center;
 }
 
-/* Pastikan elemen tersembunyi tidak muncul */
+/* PASTIKAN ELEMEN TERSEMBUNYI TIDAK MUNCUL */
+
 .citation-result-area [hidden] {
   display: none !important;
 }
