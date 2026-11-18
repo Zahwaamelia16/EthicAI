@@ -219,7 +219,7 @@ function renderResult() {
       elements.doneList.appendChild(item);
     });
   }
-    if (window.lucide) {
+  if (window.lucide) {
     window.lucide.createIcons();
   }
 }
@@ -274,19 +274,17 @@ elements.backButton.addEventListener("click", goToPrevious);
 elements.nextButton.addEventListener("click", goToNext);
 elements.restartButton.addEventListener("click", restartChecklist);
 
-// Tombol ini menjadi titik integrasi dengan bagian Generator milik anggota kelompok lain.
+// Tombol ini terhubung langsung dengan bagian Generator Deklarasi AI.
 elements.declarationButton.addEventListener("click", () => {
   const declarationEvent = new CustomEvent("ethicai:open-generator", {
     detail: { answers: [...answers], questions }
   });
   window.dispatchEvent(declarationEvent);
-  showToast("Hubungkan tombol ini ke halaman Generator AI kelompokmu.");
 });
 
-// Tautan Generator pada navbar juga disiapkan sebagai titik integrasi.
+// Tautan Generator pada navbar.
 document.getElementById("generatorNav").addEventListener("click", (event) => {
   event.preventDefault();
-  showToast("Bagian Generator AI dikerjakan pada bagian anggota kelompok lain.");
 });
 
 renderQuestion();
@@ -544,7 +542,7 @@ if (window.lucide) {
 
   });
 
-  
+
   // Tombol Reset Form
   citationForm.addEventListener("reset", function() {
 
@@ -669,4 +667,169 @@ if (window.lucide) {
 
   }, true);
 
+})();
+
+/* =========================================================
+   LOGIKA HALAMAN GENERATOR DEKLARASI AI
+   ========================================================= */
+(() => {
+  const declarationView = document.getElementById("declaration");
+  if (!declarationView) return;
+
+  const checklistView = document.getElementById("checklistView");
+  const resultView = document.getElementById("resultView");
+  const citationView = document.getElementById("generator");
+
+  const checklistNav = document.getElementById("checklistNav");
+  const generatorNav = document.getElementById("generatorNav");
+  const header = document.getElementById("siteHeader");
+  const footer = document.getElementById("siteFooter");
+
+  function openDeclarationPage() {
+    if (checklistView) checklistView.classList.add("is-hidden");
+    if (resultView) resultView.classList.add("is-hidden");
+    if (citationView) citationView.classList.add("is-hidden");
+
+    declarationView.classList.remove("is-hidden");
+
+    if (header) header.classList.remove("is-hidden");
+    if (footer) footer.classList.remove("is-hidden");
+
+    if (checklistNav) checklistNav.classList.remove("active");
+    if (generatorNav) generatorNav.classList.add("active");
+
+    history.replaceState(null, "", "#declaration");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Buka halaman Deklarasi saat tombol "Buat Deklarasi AI" di halaman hasil diklik
+  window.addEventListener("ethicai:open-generator", openDeclarationPage);
+
+  // Buka halaman Deklarasi saat tab "AI Declaration Generator" diklik
+  document.addEventListener("click", (event) => {
+    const declLink = event.target.closest('a[href="#declaration"]');
+    if (declLink) {
+      event.preventDefault();
+      event.stopPropagation();
+      openDeclarationPage();
+      return;
+    }
+
+    // Sembunyikan halaman Deklarasi jika user pindah ke Checklist atau Sitasi
+    const otherLink = event.target.closest('a[href="#generator"], a[href="#checklist"]');
+    if (otherLink) {
+      declarationView.classList.add("is-hidden");
+    }
+  }, true);
+
+  // Logika Form & Generator Teks Deklarasi
+  const form = document.getElementById("declarationForm");
+  const resetBtn = document.getElementById("resetDeclBtn");
+  const emptyStateCard = document.getElementById("declEmptyStateCard");
+  const resultStateCard = document.getElementById("declResultStateCard");
+  const declarationOutput = document.getElementById("declarationOutput");
+  const copyBtn = document.getElementById("copyDeclBtn");
+  const regenerateBtn = document.getElementById("regenerateDeclBtn");
+  const copyBadge = document.getElementById("declCopyBadge");
+
+  let variantIndex = 0;
+
+  function cleanEnding(text) {
+    return text.trim().replace(/[.?!,]+$/, "");
+  }
+
+  function toMidSentence(text) {
+    const cleaned = cleanEnding(text);
+    if (!cleaned) return "";
+    if (cleaned.length > 1 && cleaned[1] === cleaned[1].toUpperCase() && /[A-Z]/.test(cleaned[1])) {
+      return cleaned;
+    }
+    return cleaned.charAt(0).toLowerCase() + cleaned.slice(1);
+  }
+
+  function toStartSentence(text) {
+    const cleaned = cleanEnding(text);
+    if (!cleaned) return "";
+    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+  }
+
+  function generateDeclarationText() {
+    const tools = cleanEnding(document.getElementById("aiTools").value);
+    const purpose = toMidSentence(document.getElementById("aiPurpose").value);
+    const assistance = toMidSentence(document.getElementById("aiAssistance").value);
+    const taskPart = toMidSentence(document.getElementById("taskPart").value).replace(/^bagian\s+/i, "");
+    const review = toStartSentence(document.getElementById("humanReview").value);
+
+    const templates = [
+      {
+        p1: `Saya menggunakan ${tools} untuk ${purpose}. Bantuan AI mencakup ${assistance}, serta ${taskPart}.`,
+        p2: `${review}. Saya bertanggung jawab atas isi, keakuratan, dan orisinalitas tugas akhir ini.`
+      },
+      {
+        p1: `Dalam penyusunan tugas ini, saya memanfaatkan ${tools} guna ${purpose}, khususnya melalui ${assistance} pada bagian ${taskPart}.`,
+        p2: `${review}. Seluruh substansi, validasi sumber, dan keaslian karya ini sepenuhnya menjadi tanggung jawab saya.`
+      }
+    ];
+
+    const selected = templates[variantIndex % templates.length];
+
+    return `
+      <p>${selected.p1}</p>
+      <p>${selected.p2}</p>
+      <p class="decl-box-note" contenteditable="false">Tinjau dan sesuaikan sebelum dimasukkan ke tugas</p>
+    `;
+  }
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      variantIndex = 0;
+      declarationOutput.innerHTML = generateDeclarationText();
+
+      emptyStateCard.classList.add("is-hidden");
+      resultStateCard.classList.remove("is-hidden");
+      copyBadge.classList.add("is-hidden");
+    });
+  }
+
+  if (regenerateBtn) {
+    regenerateBtn.addEventListener("click", () => {
+      variantIndex += 1;
+      declarationOutput.innerHTML = generateDeclarationText();
+      copyBadge.classList.add("is-hidden");
+    });
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const cleanText = Array.from(declarationOutput.querySelectorAll("p:not(.decl-box-note)"))
+        .map((p) => p.innerText.trim())
+        .join("\n\n");
+
+      try {
+        await navigator.clipboard.writeText(cleanText);
+      } catch (err) {
+        const tempInput = document.createElement("textarea");
+        tempInput.value = cleanText;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+
+      copyBadge.classList.remove("is-hidden");
+      setTimeout(() => {
+        copyBadge.classList.add("is-hidden");
+      }, 3500);
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+      resultStateCard.classList.add("is-hidden");
+      emptyStateCard.classList.remove("is-hidden");
+      copyBadge.classList.add("is-hidden");
+    });
+  }
 })();
