@@ -373,64 +373,53 @@ if (window.lucide) {
 
   }
 
-  // Format tanggal IEEE
-  function formatEnglishDate(date) {
+// Format tanggal IEEE
+function formatEnglishDate(date) {
+  const dateObject = new Date(date + "T00:00:00");
 
-    const dateObject = new Date(date + "T00:00:00");
+  const months = [
+    "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
+    "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."
+  ];
 
-    return dateObject.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    });
+  return `${months[dateObject.getMonth()]} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
+}
 
+// Membuat sitasi APA 7
+function generateAPA(data) {
+  const author = data.developer || data.toolName;
+  const title = data.version || data.toolName;
+  const year = data.date.slice(0, 4);
+
+  let citation =
+    `${author}. (${year}). ${title} [Large language model].`;
+
+  if (data.url) {
+    citation += ` ${data.url}`;
   }
 
-  // Membuat sitasi APA
-  function generateAPA(data) {
+  return citation;
+}
 
-    const year = data.date.slice(0, 4);
-    const author = data.developer || data.toolName;
+// Membuat sitasi IEEE
+function generateIEEE(data) {
+  const author = data.developer || data.toolName;
 
-    const toolInformation = data.version
-      ? `${data.toolName} (${data.version})`
-      : data.toolName;
+  const title = data.version
+    ? `${data.toolName} (${data.version})`
+    : data.toolName;
 
-    let citation =
-      `${author}. (${year}). ${toolInformation} [Large language model].`;
+  const accessDate = formatEnglishDate(data.date);
 
-    if (data.url) {
-      citation += ` ${data.url}`;
-    }
+  let citation =
+    `[1] ${title}, ${author}. Accessed: ${accessDate}. [Online].`;
 
-    return citation;
-
+  if (data.url) {
+    citation += ` Available: ${data.url}`;
   }
 
-  // Membuat sitasi IEEE
-  function generateIEEE(data) {
-
-    const year = data.date.slice(0, 4);
-    const author = data.developer || data.toolName;
-
-    const toolInformation = data.version
-      ? `${data.toolName} (${data.version})`
-      : data.toolName;
-
-    const accessDate = formatEnglishDate(data.date);
-
-    let citation =
-      `[1] ${author}, "${toolInformation}," ${year}. [Online].`;
-
-    if (data.url) {
-      citation += ` Available: ${data.url}.`;
-    }
-
-    citation += ` [Accessed: ${accessDate}].`;
-
-    return citation;
-
-  }
+  return citation;
+}
 
   // Proses membuat sitasi
   function createCitation() {
