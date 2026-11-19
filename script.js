@@ -822,3 +822,227 @@ function generateIEEE(data) {
     });
   }
 })();
+
+/* =========================================================
+   NAVIGASI BERANDA DAN PANDUAN ETIKA AI
+   KODE TAMBAHAN AROFATUL LAILIYA
+   Tidak mengubah fungsi navigasi yang sudah ada.
+   ========================================================= */
+
+(() => {
+
+  // Mengambil seluruh halaman
+  const homeView = document.getElementById("homeView");
+  const guideView = document.getElementById("panduan");
+  const checklistView = document.getElementById("checklistView");
+  const resultView = document.getElementById("resultView");
+  const citationView = document.getElementById("generator");
+  const declarationView = document.getElementById("declaration");
+
+  // Mengambil header dan footer
+  const header = document.getElementById("siteHeader");
+  const footer = document.getElementById("siteFooter");
+
+  // Memastikan semua elemen tersedia
+  if (
+    !homeView ||
+    !guideView ||
+    !checklistView ||
+    !resultView ||
+    !citationView ||
+    !declarationView ||
+    !header ||
+    !footer
+  ) {
+    console.error("Halaman EthicAI belum lengkap.");
+    return;
+  }
+
+  // Daftar seluruh halaman
+  const pages = {
+    home: homeView,
+    guide: guideView,
+    checklist: checklistView,
+    citation: citationView,
+    declaration: declarationView
+  };
+
+  // Mengatur menu navbar yang aktif
+  function updateActiveNavigation(page) {
+
+    const navLinks = document.querySelectorAll(".main-nav a");
+
+    let activeTarget = "#top";
+
+    if (page === "guide") {
+      activeTarget = "#panduan";
+    } else if (page === "checklist") {
+      activeTarget = "#checklist";
+    } else if (
+      page === "citation" ||
+      page === "declaration"
+    ) {
+      activeTarget = "#generator";
+    }
+
+    navLinks.forEach((link) => {
+
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === activeTarget
+      );
+
+    });
+
+  }
+
+  // Fungsi untuk berpindah halaman
+  function showEthicAIPage(page, options = {}) {
+
+    if (!pages[page]) return;
+
+    // Menampilkan halaman yang dipilih
+    Object.entries(pages).forEach(([pageName, element]) => {
+
+      element.classList.toggle(
+        "is-hidden",
+        pageName !== page
+      );
+
+    });
+
+    // Halaman hasil checklist disembunyikan saat berpindah halaman
+    resultView.classList.add("is-hidden");
+
+    // Header dan footer ditampilkan
+    header.classList.remove("is-hidden");
+    footer.classList.remove("is-hidden");
+
+    // Header transparan hanya aktif pada Beranda
+    header.classList.toggle(
+      "home-header",
+      page === "home"
+    );
+
+    // Memperbarui navbar
+    updateActiveNavigation(page);
+
+    // Memperbarui alamat halaman
+    if (options.updateUrl !== false && options.hash) {
+
+      history.replaceState(
+        null,
+        "",
+        options.hash
+      );
+
+    }
+
+    // Mengatur posisi halaman
+    if (options.targetId) {
+
+      const target = document.getElementById(
+        options.targetId
+      );
+
+      if (target) {
+
+        window.scrollTo({
+          top: target.getBoundingClientRect().top +
+               window.scrollY - 25,
+          behavior: "smooth"
+        });
+
+      }
+
+    } else if (options.scroll !== false) {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+  }
+
+  // Daftar navigasi halaman
+  const routes = {
+    "#top": {
+      page: "home"
+    },
+
+    "#panduan": {
+      page: "guide"
+    },
+
+    "#checklist": {
+      page: "checklist"
+    },
+
+    "#generator": {
+      page: "citation"
+    },
+
+    "#declaration": {
+      page: "declaration"
+    },
+
+    "#tentang": {
+      page: "home",
+      targetId: "tentang"
+    }
+  };
+
+  // Event listener untuk seluruh navigasi
+  document.addEventListener("click", (event) => {
+
+    const link = event.target.closest("a[href]");
+
+    if (!link) return;
+
+    const destination = link.getAttribute("href");
+    const route = routes[destination];
+
+    if (!route) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    showEthicAIPage(route.page, {
+      hash: destination,
+      targetId: route.targetId
+    });
+
+  }, true);
+
+  // Menangani tombol deklarasi dari halaman hasil checklist
+  window.addEventListener("ethicai:open-generator", () => {
+
+    showEthicAIPage("declaration", {
+      hash: "#declaration"
+    });
+
+  });
+
+  // Menentukan halaman awal berdasarkan alamat URL
+  const initialRoute = routes[window.location.hash];
+
+  if (initialRoute) {
+
+    showEthicAIPage(initialRoute.page, {
+      updateUrl: false,
+      scroll: false
+    });
+
+  } else {
+
+    // Beranda menjadi halaman pertama saat website dibuka
+    showEthicAIPage("home", {
+      updateUrl: false,
+      scroll: false
+    });
+
+  }
+
+})();
