@@ -53,6 +53,9 @@ const answers = Array(questions.length).fill(null);
 let currentQuestion = 0;
 let toastTimeout;
 
+let isSavingEvaluation = false;
+let evaluationSaved = false;
+
 const elements = {
   header: document.getElementById("siteHeader"),
   footer: document.getElementById("siteFooter"),
@@ -128,6 +131,75 @@ function showToast(message) {
   elements.toast.classList.add("show");
   window.clearTimeout(toastTimeout);
   toastTimeout = window.setTimeout(() => elements.toast.classList.remove("show"), 2800);
+}
+
+
+async function saveEvaluationToFirebase() {
+  if (isSavingEvaluation || evaluationSaved) return;
+
+  if (typeof window.simpanHasilEvaluasi !== "function") {
+    console.error("Fungsi Firebase belum tersedia.");
+    showToast("Koneksi Firebase belum siap. Silakan muat ulang halaman.");
+    return;
+  }
+
+  const yesCount = answers.filter((answer) => answer === "yes").length;
+  const percentage = Math.round((yesCount / questions.length) * 100);
+
+  const noIndexes = questions
+    .map((question, index) => answers[index] === "no" ? index : -1)
+    .filter((index) => index !== -1);
+
+  const completedHabits = questions.filter(
+    (question, index) => answers[index] === "yes"
+  );
+
+  const scoreMessage = getScoreMessage(percentage);
+
+  const evaluationData = {
+    jawaban: questions.map((question, index) => ({
+      kategori: question.category,
+      pertanyaan: question.title,
+      jawaban: answers[index] === "yes" ? "Ya" : "Tidak"
+    })),
+
+    jumlahYa: yesCount,
+    totalPertanyaan: questions.length,
+    skorPersentase: percentage,
+
+    rekomendasi: noIndexes.map((index) => ({
+      kategori: questions[index].category,
+      judul: questions[index].improvementTitle,
+      deskripsi: questions[index].improvementText
+    })),
+
+    kebiasaanDiterapkan: completedHabits.map(
+      (question) => question.habit
+    ),
+
+    ringkasan: {
+      judul: scoreMessage.heading.replace("\n", " "),
+      deskripsi: scoreMessage.description
+    }
+  };
+
+  isSavingEvaluation = true;
+
+  try {
+    const documentId = await window.simpanHasilEvaluasi(evaluationData);
+
+    evaluationSaved = true;
+
+    console.log("Evaluasi berhasil disimpan:", documentId);
+    showToast("Hasil evaluasi berhasil disimpan!");
+
+  } catch (error) {
+    console.error("Gagal menyimpan evaluasi:", error);
+    showToast("Hasil evaluasi gagal disimpan. Periksa koneksi Firebase.");
+
+  } finally {
+    isSavingEvaluation = false;
+  }
 }
 
 function getScoreMessage(percentage) {
@@ -231,6 +303,10 @@ function showResult() {
   }
 
   renderResult();
+
+  // Simpan hasil evaluasi ke Firebase
+  saveEvaluationToFirebase();
+
   elements.checklistView.classList.add("is-hidden");
   elements.resultView.classList.remove("is-hidden");
   elements.header.classList.add("is-hidden");
@@ -254,16 +330,21 @@ function goToPrevious() {
   renderQuestion();
 }
 
+
 function restartChecklist() {
   answers.fill(null);
   currentQuestion = 0;
+  evaluationSaved = false;
+
   elements.resultView.classList.add("is-hidden");
   elements.checklistView.classList.remove("is-hidden");
   elements.header.classList.remove("is-hidden");
   elements.footer.classList.remove("is-hidden");
+
   renderQuestion();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
 
 // Event listeners untuk pilihan jawaban.
 document.querySelectorAll('input[name="answer"]').forEach((input) => {
@@ -421,8 +502,8 @@ function generateIEEE(data) {
   return citation;
 }
 
-  // Proses membuat sitasi
-  function createCitation() {
+  // Proses membuat dan menyimpan sitasi
+  async function createCitation() {
 
     if (!citationForm.reportValidity()) {
       return;
@@ -447,10 +528,8 @@ function generateIEEE(data) {
     usageNote.textContent =
       `Catatan penggunaan: ${formatIndonesianDate(data.date)}; ${data.purpose}`;
 
-    // PANEL HIJAU HILANG
+    // Menampilkan card hasil
     previewContent.hidden = true;
-
-    // CARD HASIL PUTIH MUNCUL
     resultContent.hidden = false;
 
     // Menyembunyikan notifikasi sebelumnya
@@ -460,7 +539,40 @@ function generateIEEE(data) {
       notificationCaption.hidden = true;
     }
 
+    // Menyimpan hasil sitasi ke Firebase
+    try {
+
+      if (typeof window.simpanHasilSitasi !== "function") {
+        throw new Error("Fungsi Firebase simpanHasilSitasi belum tersedia.");
+      }
+
+      const documentId = await window.simpanHasilSitasi({
+
+        toolName: data.toolName,
+        developer: data.developer,
+        version: data.version,
+        usageDate: data.date,
+        purpose: data.purpose,
+        toolUrl: data.url,
+        format: data.format,
+        citation: result
+
+      });
+
+      console.log("Sitasi berhasil disimpan:", documentId);
+
+      showToast("Sitasi berhasil disimpan ke database!");
+
+    } catch (error) {
+
+      console.error("Gagal menyimpan sitasi:", error);
+
+      showToast("Sitasi berhasil dibuat, tetapi gagal disimpan ke database.");
+
+    }
+
   }
+
 
   // Tombol Generate Citation
   citationForm.addEventListener("submit", function(event) {
@@ -723,6 +835,50 @@ function generateIEEE(data) {
 
   let variantIndex = 0;
 
+
+  // Menyimpan hasil deklarasi ke Firebase
+  async function saveDeclarationToFirebase() {
+
+    if (typeof window.simpanHasilDeklarasi !== "function") {
+      console.error("Fungsi Firebase simpanHasilDeklarasi belum tersedia.");
+      showToast("Koneksi Firebase belum siap.");
+      return;
+    }
+
+    const declarationText = Array.from(
+      declarationOutput.querySelectorAll("p:not(.decl-box-note)")
+    )
+      .map((p) => p.innerText.trim())
+      .join("\n\n");
+
+    const declarationData = {
+      toolName: document.getElementById("aiTools").value.trim(),
+      purpose: document.getElementById("aiPurpose").value.trim(),
+      assistance: document.getElementById("aiAssistance").value.trim(),
+      taskPart: document.getElementById("taskPart").value.trim(),
+      humanReview: document.getElementById("humanReview").value.trim(),
+      declaration: declarationText,
+      variant: (variantIndex % 2) + 1
+    };
+
+    try {
+
+      const documentId = await window.simpanHasilDeklarasi(
+        declarationData
+      );
+
+      console.log("Deklarasi berhasil disimpan:", documentId);
+      showToast("Deklarasi berhasil disimpan ke database!");
+
+    } catch (error) {
+
+      console.error("Gagal menyimpan deklarasi:", error);
+      showToast("Deklarasi berhasil dibuat, tetapi gagal disimpan ke database.");
+
+    }
+  }
+
+
   function cleanEnding(text) {
     return text.trim().replace(/[.?!,]+$/, "");
   }
@@ -769,25 +925,34 @@ function generateIEEE(data) {
     `;
   }
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      variantIndex = 0;
-      declarationOutput.innerHTML = generateDeclarationText();
 
-      emptyStateCard.classList.add("is-hidden");
-      resultStateCard.classList.remove("is-hidden");
-      copyBadge.classList.add("is-hidden");
-    });
-  }
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if (regenerateBtn) {
-    regenerateBtn.addEventListener("click", () => {
-      variantIndex += 1;
-      declarationOutput.innerHTML = generateDeclarationText();
-      copyBadge.classList.add("is-hidden");
-    });
-  }
+    variantIndex = 0;
+    declarationOutput.innerHTML = generateDeclarationText();
+
+    emptyStateCard.classList.add("is-hidden");
+    resultStateCard.classList.remove("is-hidden");
+    copyBadge.classList.add("is-hidden");
+
+    // Simpan hasil deklarasi ke Firebase
+    await saveDeclarationToFirebase();
+  });
+}
+
+if (regenerateBtn) {
+  regenerateBtn.addEventListener("click", async () => {
+    variantIndex += 1;
+    declarationOutput.innerHTML = generateDeclarationText();
+    copyBadge.classList.add("is-hidden");
+
+    // Simpan versi deklarasi terbaru ke Firebase
+    await saveDeclarationToFirebase();
+  });
+}
+
 
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
