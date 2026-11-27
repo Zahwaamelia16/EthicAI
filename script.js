@@ -840,7 +840,7 @@ if (window.lucide) {
   // Buka halaman Deklarasi saat tombol "Buat Deklarasi AI" di halaman hasil diklik
   window.addEventListener("ethicai:open-generator", openDeclarationPage);
 
-  // Buka halaman Deklarasi saat tab "Pembuat Pernyataan Penggunaan AI" diklik
+  // Buka halaman Deklarasi saat tab "Deklarasi Penggunaan AI" diklik
   document.addEventListener("click", (event) => {
     const declLink = event.target.closest('a[href="#declaration"]');
     if (declLink) {
@@ -1293,3 +1293,27 @@ if (window.lucide) {
   }
 
 })();
+
+
+
+/* =====================================================
+   ETHICAI - FAQ ACCORDION SATU PERTANYAAN
+   Hanya satu pertanyaan terbuka dalam satu waktu
+   ===================================================== */
+
+(() => {
+  const faqItems = document.querySelectorAll(".home-faq-item");
+
+  faqItems.forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (!item.open) return;
+
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.open = false;
+        }
+      });
+    });
+  });
+})();
+

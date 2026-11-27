@@ -1124,21 +1124,12 @@ h1, h2, h3, p { overflow-wrap: break-word; }
    ========================================================= */
 
 .decl-page {
-  padding: 69px 0 65px;
+  padding: 60px 0 70px;
 }
 
-.decl-intro {
-  margin-bottom: 28px;
-}
 
-.decl-intro h1 {
-  margin: 0;
-  color: var(--green);
-  font-size: clamp(34px, 4vw, 43px);
-  font-weight: 700;
-  line-height: 1.23;
-  letter-spacing: -1.4px;
-}
+
+
 
 .decl-tabs {
   display: grid;
@@ -1149,6 +1140,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   border: 1px solid var(--line);
   border-radius: 13px;
   background: var(--white);
+  box-shadow: var(--ethic-shadow);
 }
 
 .decl-tab {
@@ -1280,12 +1272,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   gap: 18px;
 }
 
-.decl-preview-card {
-  padding: 28px 26px 26px;
-  border-radius: 13px;
-  color: var(--white);
-  background: var(--green);
-}
+
 
 .decl-preview-card h2 {
   margin: 18px 0 16px;
@@ -1397,12 +1384,9 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 
 @media (max-width: 700px) {
   .decl-page {
-    padding: 48px 0 45px;
+    padding: 35px 0 45px;
   }
-  .decl-intro h1 {
-    font-size: clamp(29px, 8vw, 37px);
-    letter-spacing: -1px;
-  }
+
   .decl-tabs,
   .decl-result-actions {
     grid-template-columns: 1fr;
@@ -1789,53 +1773,19 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   gap: 20px;
 }
 
-.home-tool-card {
-  min-width: 0;
-  min-height: 220px;
-  padding: 23px 21px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--white);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
 
-.home-tool-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(7, 63, 54, .08);
-}
 
-.home-tool-number {
-  margin: 0 0 16px;
-  color: var(--muted);
-  font-size: 8px;
-}
 
-.home-tool-card h3 {
-  margin: 0 0 10px;
-  color: var(--green);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.4;
-}
 
-.home-tool-card > p:not(.home-tool-number) {
-  min-height: 57px;
-  margin: 0 0 14px;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.8;
-}
 
-.home-tool-card a {
-  color: var(--green-text);
-  font-size: 10px;
-  font-weight: 500;
-}
 
-.home-tool-card a span {
-  color: var(--coral);
-  font-weight: 700;
-}
+
+
+
+
+
+
+
 
 /* LANGKAH PENGGUNAAN */
 
@@ -2071,37 +2021,17 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   overflow: hidden;
 }
 
-.guide-intro {
-  padding-top: 67px;
-  padding-bottom: 90px;
-}
+
 
 .guide-intro .home-eyebrow {
   margin-bottom: 27px;
 }
 
-.guide-intro h1 {
-  margin: 0;
-  color: var(--green);
-  font-size: clamp(34px, 4.2vw, 43px);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -1.3px;
-}
 
-.guide-intro > p:not(.home-eyebrow) {
-  max-width: 650px;
-  margin: 22px 0 20px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-}
 
-.guide-meta {
-  color: var(--muted);
-  font-size: 8px;
-  letter-spacing: .5px;
-}
+
+
+
 
 /* TOOL AI */
 
@@ -2413,9 +2343,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
     gap: 13px;
   }
 
-  .home-tool-card {
-    padding: 19px 15px;
-  }
+
 
   .home-declaration-cta {
     padding: 28px;
@@ -2485,14 +2413,9 @@ h1, h2, h3, p { overflow-wrap: break-word; }
     gap: 13px;
   }
 
-  .home-tool-card {
-    min-height: auto;
-    padding: 20px;
-  }
 
-  .home-tool-card > p:not(.home-tool-number) {
-    min-height: auto;
-  }
+
+
 
   .home-steps-section {
     grid-template-columns: 1fr;
@@ -2528,18 +2451,11 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 
   /* PANDUAN */
 
-  .guide-intro {
-    padding-top: 49px;
-    padding-bottom: 66px;
-  }
 
-  .guide-intro h1 {
-    font-size: clamp(31px, 8vw, 39px);
-  }
 
-  .guide-intro > p:not(.home-eyebrow) {
-    font-size: 11px;
-  }
+
+
+
 
   .guide-tools {
     padding-bottom: 48px;
@@ -2776,29 +2692,13 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 }
 
 /* 4. GUIDE INTRODUCTION */
-.guide-intro {
-  padding-top: 62px;
-  padding-bottom: 62px;
-}
 
-.guide-intro h1 {
-  font-size: clamp(38px, 4.5vw, 50px);
-  line-height: 1.16;
-  letter-spacing: -1.8px;
-}
 
-.guide-intro > p:not(.home-eyebrow) {
-  max-width: 720px;
-  font-size: 13px;
-  line-height: 1.9;
-}
 
-.guide-meta {
-  display: inline-block;
-  padding-top: 13px;
-  border-top: 1px solid var(--line);
-  letter-spacing: 0.8px;
-}
+
+
+
+
 
 /* 5. GUIDE TOOLS SECTION */
 .guide-tools {
@@ -2902,19 +2802,11 @@ button:focus-visible {
     background: var(--green);
   }
 
-  .guide-intro {
-    padding-top: 43px;
-    padding-bottom: 48px;
-  }
 
-  .guide-intro h1 {
-    font-size: clamp(32px, 8vw, 42px);
-    letter-spacing: -1.2px;
-  }
 
-  .guide-intro > p:not(.home-eyebrow) {
-    font-size: 11px;
-  }
+
+
+
 
   .guide-tools {
     padding-bottom: 48px;
@@ -2949,3 +2841,1642 @@ button:focus-visible {
     animation-duration: 0.01ms !important;
   }
 }
+
+
+
+/* =====================================================
+   ETHICAI - PENYELARASAN VISUAL HALAMAN INTERNAL
+   Konsep: Editorial Academic + Modern Minimalist
+   ===================================================== */
+
+:root {
+  --ethic-shadow:
+    0 10px 30px rgba(7, 63, 54, 0.065);
+  --ethic-shadow-hover:
+    0 15px 35px rgba(7, 63, 54, 0.11);
+  --ethic-radius: 17px;
+  --ethic-radius-large: 22px;
+}
+
+/* 1. JUDUL HALAMAN INTERNAL */
+
+.page-intro,
+.result-intro,
+.citation-intro,
+
+
+.page-intro h1,
+.result-intro h1,
+.citation-intro h1,
+
+
+.page-intro .eyebrow,
+.result-intro .eyebrow,
+.citation-eyebrow,
+.decl-intro .eyebrow {
+  color: #b66c5d;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.page-intro .intro-copy,
+.result-intro .intro-copy,
+.citation-intro > p:last-child {
+  max-width: 680px;
+  line-height: 1.9;
+}
+
+/* 2. HERO PANDUAN ETIKA AI */
+
+
+
+.guide-intro::after {
+  position: absolute;
+  z-index: -1;
+  right: -90px;
+  bottom: -220px;
+  width: 440px;
+  height: 440px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 35px rgba(255,255,255,.035),
+    0 0 0 75px rgba(255,255,255,.025);
+  content: "";
+}
+
+.guide-intro > * {
+  position: relative;
+  z-index: 1;
+}
+
+.guide-intro .home-eyebrow {
+  color: var(--coral);
+  letter-spacing: 1.4px;
+}
+
+
+
+
+
+
+
+/* 3. JARAK ANTARBAGIAN */
+
+.guide-tools,
+.guide-dos-donts,
+.guide-cases,
+.guide-verification,
+.guide-references {
+  padding-top: 18px;
+  padding-bottom: 65px;
+}
+
+.guide-tools h2,
+.guide-dos-donts h2,
+.guide-cases h2,
+.guide-verification h2,
+.guide-references h2 {
+  margin-bottom: 20px;
+  font-size: clamp(27px, 3vw, 35px);
+  letter-spacing: -1px;
+}
+
+.home-eyebrow {
+  letter-spacing: 1px;
+}
+
+/* 4. KARTU PANDUAN */
+
+.guide-tool-grid,
+.guide-case-grid {
+  gap: 20px;
+}
+
+.guide-tool-card,
+.guide-case-card {
+  position: relative;
+  min-height: 175px;
+  overflow: hidden;
+  padding: 25px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--ethic-radius);
+  background: var(--white);
+  box-shadow: var(--ethic-shadow);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.guide-tool-card::before,
+.guide-case-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--coral);
+  content: "";
+  opacity: .9;
+}
+
+.guide-tool-card:hover,
+.guide-case-card:hover {
+  transform: translateY(-5px);
+  border-color: #c5d5ca;
+  box-shadow: var(--ethic-shadow-hover);
+}
+
+.guide-tool-card h3,
+.guide-case-card h3 {
+  margin-bottom: 13px;
+  font-size: 17px;
+}
+
+.guide-tool-card p,
+.guide-case-card p {
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+/* 5. BAGIAN PRINSIP */
+
+.guide-principles {
+  position: relative;
+  overflow: hidden;
+  padding: 70px 0;
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(255, 139, 120, .10),
+      transparent 30%
+    ),
+    linear-gradient(125deg, #042d26, #073f36 75%, #0b5547);
+}
+
+.guide-principles h2 {
+  font-size: clamp(28px, 3.5vw, 38px);
+  letter-spacing: -1px;
+}
+
+.guide-principle-grid {
+  gap: 18px;
+}
+
+.guide-principle-grid article {
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 15px;
+  background: rgba(255,255,255,.055);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.guide-principle-grid article:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.10);
+}
+
+.guide-principle-grid article > span {
+  font-size: 28px;
+  color: var(--coral);
+}
+
+/* 6. DO AND DON'T */
+
+.guide-dos-grid {
+  gap: 20px;
+}
+
+.guide-dos-card,
+.guide-donts-card {
+  padding: 26px;
+  border-radius: var(--ethic-radius);
+  box-shadow: var(--ethic-shadow);
+}
+
+.guide-dos-card {
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.guide-donts-card {
+  border: 1px solid var(--green);
+  background: var(--green);
+}
+
+.guide-dos-card h3,
+.guide-donts-card h3 {
+  margin-bottom: 20px;
+  font-size: 19px;
+}
+
+.guide-dos-card p,
+.guide-donts-card p {
+  position: relative;
+  padding-left: 22px;
+  margin: 15px 0;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.guide-dos-card p::before,
+.guide-donts-card p::before {
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+.guide-dos-card p::before {
+  color: var(--green);
+  content: "✓";
+}
+
+.guide-donts-card p::before {
+  color: var(--coral);
+  content: "×";
+}
+
+/* 7. VERIFIKASI DAN REFERENSI */
+
+.guide-verification-list {
+  gap: 16px;
+}
+
+.guide-verification-list article {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--coral);
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: var(--ethic-shadow);
+  transition: transform .2s ease;
+}
+
+.guide-verification-list article:hover {
+  transform: translateX(4px);
+}
+
+.guide-verification-list h3 {
+  font-size: 16px;
+}
+
+.guide-verification-list p {
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.guide-reference-list a {
+  width: 100%;
+  padding: 16px 19px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: white;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.guide-reference-list a:hover {
+  border-color: #adc4b5;
+  background: #eef3ed;
+}
+
+/* 8. KARTU CHECKLIST DAN HASIL */
+
+.checklist-layout,
+.result-layout {
+  gap: 24px;
+}
+
+.question-card,
+.result-card,
+.citation-form,
+.citation-result-card,
+.decl-form-card,
+.decl-result-card {
+  padding: 29px;
+  border: 1px solid var(--line);
+  border-radius: var(--ethic-radius);
+  background: white;
+  box-shadow: var(--ethic-shadow);
+}
+
+.question-card,
+.result-card {
+  box-shadow: 0 12px 32px rgba(7, 63, 54, .055);
+}
+
+.card-heading {
+  font-size: 20px;
+}
+
+.question-title {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.question-description {
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.progress-track {
+  height: 8px;
+  background: #e7ece6;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #073f36, #39936c);
+}
+
+.answer-option {
+  min-height: 40px;
+  min-width: 90px;
+  justify-content: center;
+  border-radius: 9px;
+  font-size: 11px;
+}
+
+.answer-option.selected {
+  border-color: var(--green);
+  background: #eaf1eb;
+}
+
+/* 9. PANEL HIJAU */
+
+.before-card,
+.next-card,
+.citation-preview-card,
+.decl-preview-card {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--ethic-radius);
+  background:
+    radial-gradient(
+      circle at 95% 5%,
+      rgba(255,139,120,.15),
+      transparent 35%
+    ),
+    linear-gradient(145deg, #073f36, #052c26);
+  box-shadow: 0 13px 30px rgba(7,63,54,.12);
+}
+
+.before-card h2,
+.next-card h2,
+.citation-preview-card h2,
+.decl-preview-card h2 {
+  font-size: 27px;
+  line-height: 1.35;
+}
+
+.important-note {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.15);
+}
+
+/* 10. HASIL EVALUASI */
+
+.score-number {
+  color: var(--green);
+  font-size: clamp(58px, 6vw, 76px);
+}
+
+.score-caption {
+  font-size: 10px;
+}
+
+.score-description h2 {
+  font-size: 23px;
+}
+
+.score-description p {
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.improvement-item,
+.no-improvement {
+  padding: 19px;
+  border: 1px solid #e6e9df;
+  border-radius: 11px;
+  background: #f7f7f0;
+}
+
+.improvement-item h3 {
+  font-size: 15px;
+}
+
+.improvement-item p,
+.no-improvement {
+  font-size: 11px;
+  line-height: 1.85;
+}
+
+/* 11. TAB GENERATOR */
+
+.citation-tabs,
+
+
+.citation-tab,
+.decl-tab {
+  min-height: 44px;
+  border-radius: 9px;
+  font-size: 11px;
+  transition: all .2s ease;
+}
+
+.citation-tab.active,
+.decl-tab.is-active {
+  border-color: var(--green);
+  background: var(--green);
+  box-shadow: 0 4px 12px rgba(7,63,54,.13);
+}
+
+/* 12. FORM GENERATOR */
+
+.citation-form,
+.decl-form-card {
+  padding: 29px;
+}
+
+.citation-form h2,
+.decl-form-card h2 {
+  font-size: 21px;
+}
+
+.citation-field > label,
+.decl-field label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.citation-field input,
+.citation-field textarea,
+.decl-field input,
+.decl-field textarea {
+  min-height: 44px;
+  padding: 12px 14px;
+  border: 1px solid #dce4dd;
+  border-radius: 9px;
+  background: #fcfcf9;
+  font-size: 11px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.citation-field input:focus,
+.citation-field textarea:focus,
+.decl-field input:focus,
+.decl-field textarea:focus {
+  border-color: var(--green);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(7,63,54,.07);
+}
+
+.citation-field small,
+.decl-field small {
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+.decl-chip {
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: #f4f6ef;
+  font-size: 9px;
+}
+
+.decl-chip:hover {
+  border-color: var(--green);
+  background: #e4eee5;
+}
+
+/* 13. HASIL DAN PRATINJAU DOKUMEN */
+
+.citation-result-card,
+
+
+.citation-output,
+.decl-editable-box {
+  padding: 20px;
+  border: 1px solid #e8e9df;
+  border-radius: 11px;
+  background: #f8f7f0;
+}
+
+.decl-editable-box {
+  min-height: 160px;
+  font-size: 11px;
+  line-height: 1.95;
+}
+
+.citation-note,
+.decl-disclaimer-card {
+  padding: 21px;
+  border-radius: 13px;
+  background: #f8f7f0;
+}
+
+.citation-note > p:not(.citation-step),
+.decl-disclaimer-main {
+  font-size: 10.5px;
+  line-height: 1.9;
+}
+
+/* 14. TOMBOL SERAGAM */
+
+.button,
+.citation-buttons button,
+.citation-result-buttons button,
+.home-btn {
+  min-height: 43px;
+  border-radius: 9px;
+  font-size: 11px;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.button:hover:not(:disabled),
+.citation-buttons button:hover,
+.citation-result-buttons button:hover,
+.home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(7,63,54,.10);
+}
+
+.button-coral,
+.citation-generate,
+.citation-copy {
+  background: var(--coral);
+}
+
+.button-coral:hover:not(:disabled),
+.citation-generate:hover,
+.citation-copy:hover {
+  background: #ff9b8a;
+}
+
+/* 15. JARAK ANTARHALAMAN */
+
+.checklist-page,
+.result-page,
+.citation-generator,
+
+
+.result-actions,
+.decl-result-actions {
+  gap: 12px;
+}
+
+/* 16. RESPONSIVE TABLET */
+
+@media (max-width: 900px) {
+
+
+  .page-intro,
+  .result-intro,
+  .citation-intro,
+
+
+  .question-card,
+  .result-card,
+  .citation-form,
+  .citation-result-card,
+  .decl-form-card,
+  .decl-result-card {
+    padding: 23px;
+  }
+
+  .guide-principle-grid article {
+    padding: 19px;
+  }
+}
+
+/* 17. RESPONSIVE MOBILE */
+
+@media (max-width: 700px) {
+
+
+
+
+
+
+  .page-intro,
+  .result-intro,
+  .citation-intro,
+
+
+  .page-intro h1,
+  .result-intro h1,
+  .citation-intro h1,
+
+
+  .checklist-page,
+  .result-page,
+  .citation-generator,
+
+
+  .guide-tools,
+  .guide-dos-donts,
+  .guide-cases,
+  .guide-verification,
+  .guide-references {
+    padding-bottom: 43px;
+  }
+
+  .guide-principles {
+    padding: 46px 0;
+  }
+
+  .guide-tool-card,
+  .guide-case-card,
+  .guide-dos-card,
+  .guide-donts-card,
+  .guide-verification-list article {
+    padding: 20px;
+  }
+
+  .question-card,
+  .result-card,
+  .citation-form,
+  .citation-result-card,
+  .decl-form-card,
+  .decl-result-card {
+    padding: 21px 18px;
+    border-radius: 13px;
+  }
+
+  .before-card,
+  .next-card,
+  .citation-preview-card,
+  .decl-preview-card {
+    padding: 24px 21px;
+  }
+
+  .card-heading {
+    font-size: 17px;
+  }
+
+  .question-title {
+    font-size: 14px;
+  }
+
+  .score-number {
+    font-size: 56px;
+  }
+
+  .score-description h2 {
+    font-size: 19px;
+  }
+
+  .result-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 18. ANIMASI AKSESIBILITAS */
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-tool-card,
+  .guide-case-card,
+  .guide-principle-grid article,
+  .guide-verification-list article,
+  .button,
+  .home-btn {
+    transition: none !important;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - PENGHAPUSAN LABEL KECIL DAN BADGE INFORMASI
+   ===================================================== */
+
+/* Hilangkan tulisan kecil di atas judul utama dan judul bagian */
+.eyebrow,
+.home-eyebrow,
+.home-hero-label,
+.citation-eyebrow {
+  display: none !important;
+}
+
+/* Badge informasi checklist */
+.meta-line.meta-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 25px 0 0;
+  padding: 0;
+}
+
+/* Bentuk kapsul */
+.meta-line.meta-pills > .meta-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 7px 14px;
+  border: 1px solid #d5e2d7;
+  border-radius: 999px;
+  color: #073f36;
+  background: #e8f0e8;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .4px;
+}
+
+/* Tampilan HP */
+@media (max-width: 700px) {
+  .meta-line.meta-pills {
+    gap: 7px;
+    margin-top: 20px;
+  }
+
+  .meta-line.meta-pills > .meta-chip {
+    min-height: 30px;
+    padding: 6px 11px;
+    font-size: 8px;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - TOMBOL CHECKLIST BERBENTUK KAPSUL
+   ===================================================== */
+
+.question-actions .button,
+.question-actions .button-small {
+  min-height: 43px;
+  min-width: 110px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.question-actions .button-outline {
+  border-color: var(--coral-soft);
+}
+
+.question-actions .button-coral {
+  border-color: var(--coral);
+}
+
+.question-actions .button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+
+
+/* =====================================================
+   ETHICAI - JUDUL GENERATOR PERNYATAAN SATU BARIS
+   ===================================================== */
+
+@media (min-width: 1000px) {
+
+}
+
+
+
+/* =====================================================
+   ETHICAI - DESAIN KARTU TOOLKIT BERANDA
+   ===================================================== */
+
+.home-tool-grid {
+  align-items: stretch;
+  gap: 20px;
+}
+
+/* KARTU UTAMA */
+
+
+/* AKSEN WARNA BAGIAN ATAS */
+
+
+
+
+/* LABEL NOMOR KATEGORI */
+
+
+/* JUDUL KARTU */
+
+
+/* DESKRIPSI */
+
+
+/* TOMBOL KAPSUL */
+
+
+/* LINGKARAN IKON PANAH */
+
+
+/* EFEK HOVER TOMBOL */
+
+
+
+
+/* RESPONSIVE TABLET */
+
+
+/* RESPONSIVE HP */
+@media (max-width: 700px) {
+  .home-tool-grid {
+    gap: 15px;
+  }
+
+
+
+
+
+
+}
+
+
+
+/* =====================================================
+   ETHICAI - PENYEMPURNAAN JARAK DAN IKON PANAH
+   ===================================================== */
+
+/* Judul kartu dibuat konsisten */
+
+
+/* Deskripsi lebih dekat dengan tombol */
+
+
+/* Hilangkan jarak otomatis yang terlalu jauh */
+
+
+/* Ikon Google Fonts tanpa lingkaran */
+
+
+/* Hover panah bergerak seperti teks */
+
+
+
+
+
+
+/* =====================================================
+   ETHICAI - PENYEMPURNAAN KARTU TOOLKIT TAHAP 2
+   ===================================================== */
+
+/* Judul lebih dekat dengan garis pemisah */
+
+
+/* Deskripsi lebih dekat dengan garis dan tombol */
+
+
+/* Tombol dipindahkan ke sisi kanan kartu */
+
+
+/* Panah berada di ujung kanan tombol */
+
+
+/* Hover panah tanpa perpindahan posisi */
+
+
+/* Responsif */
+
+
+
+
+/* =====================================================
+   ETHICAI - PERAPATAN JUDUL DAN GARIS KARTU
+   ===================================================== */
+
+
+
+/* =====================================================
+   ETHICAI - KARTU TOOLKIT VERSI BERSIH
+   ===================================================== */
+
+.home-tool-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 255px;
+  padding: 25px 23px 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: linear-gradient(145deg, #ffffff, #fcfbf6);
+  box-shadow: 0 7px 20px rgba(7, 63, 54, .05);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.home-tool-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--coral), rgba(255, 139, 120, .12));
+  content: "";
+}
+
+.home-tool-card:hover {
+  transform: translateY(-5px);
+  border-color: #bfd2c4;
+  box-shadow: 0 14px 30px rgba(7, 63, 54, .10);
+}
+
+.home-tool-number {
+  display: inline-flex;
+  align-self: flex-start;
+  width: fit-content;
+  padding: 6px 12px;
+  margin: 0 0 18px;
+  border: 1px solid #f4d7d0;
+  border-radius: 999px;
+  color: #ad6858;
+  background: #fff0ec;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .7px;
+}
+
+.home-tool-card h3 {
+  min-height: 0;
+  margin: 0 0 6px;
+  padding: 0 0 7px;
+  border-bottom: 1px solid var(--line);
+  color: var(--green);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -.4px;
+}
+
+.home-tool-card > p:not(.home-tool-number) {
+  min-height: 0;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 10.5px;
+  line-height: 1.8;
+}
+
+.home-tool-card a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+  gap: 10px;
+  width: 190px;
+  max-width: 100%;
+  min-height: 43px;
+  padding: 7px 15px 7px 17px;
+  margin-top: 0;
+  border: 1px solid #d8e5da;
+  border-radius: 999px;
+  color: var(--green);
+  background: #eaf1eb;
+  font-size: 10px;
+  font-weight: 600;
+  transition: background .22s ease, color .22s ease, transform .22s ease, box-shadow .22s ease;
+}
+
+.home-tool-card a .tool-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  color: currentColor;
+  background: transparent;
+  font-family: "Material Symbols Rounded";
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1;
+  font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24;
+  transition: opacity .22s ease;
+}
+
+.home-tool-card a:hover {
+  transform: translateY(-2px);
+  border-color: var(--green);
+  color: white;
+  background: var(--green);
+  box-shadow: 0 5px 13px rgba(7, 63, 54, .12);
+}
+
+.home-tool-card a:hover .tool-arrow {
+  color: currentColor;
+  background: transparent;
+  opacity: .7;
+}
+
+/* Tampilan tablet */
+@media (max-width: 900px) {
+  .home-tool-card {
+    padding: 22px 17px;
+  }
+
+  .home-tool-card h3 {
+    font-size: 15px;
+  }
+}
+
+/* Tampilan ponsel */
+@media (max-width: 700px) {
+  .home-tool-card {
+    min-height: auto;
+    padding: 23px 20px;
+    border-radius: 15px;
+  }
+
+  .home-tool-card h3 {
+    min-height: 0;
+    font-size: 17px;
+  }
+
+  .home-tool-card > p:not(.home-tool-number) {
+    min-height: 0;
+    margin-bottom: 14px;
+  }
+
+  .home-tool-card a {
+    width: 190px;
+    align-self: flex-end;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - PANDUAN DAN GENERATOR VERSI BERSIH
+   ===================================================== */
+
+/* HERO PANDUAN ETIKA AI */
+
+.guide-intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 38px auto 64px;
+  padding: 65px 58px;
+  border-radius: var(--ethic-radius-large);
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(69, 155, 125, .30),
+      transparent 33%
+    ),
+    linear-gradient(125deg, #042a24, #073f36 65%, #0c5948);
+  box-shadow: 0 18px 40px rgba(7, 63, 54, .13);
+}
+
+.guide-intro h1 {
+  max-width: 700px;
+  margin: 0;
+  color: var(--cream);
+  font-size: clamp(37px, 4.5vw, 53px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -1.8px;
+}
+
+.guide-intro > p:not(.home-eyebrow) {
+  max-width: 660px;
+  margin: 22px 0 20px;
+  color: #e0ebe5;
+  font-size: 13px;
+  line-height: 1.95;
+}
+
+.guide-meta {
+  display: inline-block;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, .2);
+  color: #c1d5ca;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+/* HERO GENERATOR PERNYATAAN */
+
+.decl-intro {
+  position: relative;
+  padding: 32px 36px;
+  margin-bottom: 38px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--coral);
+  border-radius: var(--ethic-radius);
+  background: linear-gradient(135deg, #ffffff, #fbfaf5);
+  box-shadow: var(--ethic-shadow);
+}
+
+.decl-intro h1 {
+  max-width: none;
+  margin: 0;
+  color: var(--green);
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+}
+
+/* JUDUL SATU BARIS PADA DESKTOP */
+@media (min-width: 1000px) {
+  .decl-intro h1 {
+    white-space: nowrap;
+  }
+}
+
+/* RESPONSIVE TABLET */
+@media (max-width: 900px) {
+  .guide-intro {
+    padding: 48px 38px;
+  }
+
+  .decl-intro {
+    padding: 27px;
+  }
+}
+
+/* RESPONSIVE HP */
+@media (max-width: 700px) {
+  .guide-intro {
+    margin: 24px auto 42px;
+    padding: 39px 25px;
+    border-radius: 17px;
+  }
+
+  .guide-intro h1 {
+    font-size: clamp(32px, 8vw, 40px);
+    letter-spacing: -1.2px;
+  }
+
+  .guide-intro > p:not(.home-eyebrow) {
+    font-size: 11px;
+  }
+
+  .decl-intro {
+    padding: 23px 20px;
+    margin-bottom: 27px;
+    border-radius: 13px;
+  }
+
+  .decl-intro h1 {
+    max-width: 100%;
+    white-space: normal;
+    font-size: clamp(27px, 7vw, 36px);
+    letter-spacing: -1px;
+  }
+}
+
+
+
+
+/* ETHICAI - PEMBERSIHAN GENERATOR FINAL */
+
+
+
+/* =====================================================
+   ETHICAI - PERBAIKAN HEADER GENERATOR DAN KARTU TOOLKIT
+   ===================================================== */
+
+/* KEMBALIKAN HEADER GENERATOR BERBENTUK KOTAK */
+
+.citation-intro,
+.decl-intro {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 32px 36px;
+  margin-bottom: 32px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--coral);
+  border-radius: 17px;
+  background: linear-gradient(135deg, #ffffff 0%, #fbfaf5 100%);
+  box-shadow: var(--ethic-shadow);
+}
+
+.citation-intro h1,
+.decl-intro h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .citation-intro,
+  .decl-intro {
+    padding: 23px 20px;
+    margin-bottom: 25px;
+    border-radius: 13px;
+  }
+}
+
+/* PERAPAT TIGA KARTU TOOLKIT BERANDA */
+
+.home-tool-grid {
+  align-items: stretch;
+  gap: 20px;
+}
+
+.home-tool-card {
+  min-height: 0 !important;
+  height: auto;
+  padding: 23px 23px 18px;
+  align-self: stretch;
+}
+
+.home-tool-card h3 {
+  min-height: 0;
+  margin-bottom: 6px;
+  padding-bottom: 7px;
+}
+
+.home-tool-card > p:not(.home-tool-number) {
+  min-height: 0;
+  margin-top: 0;
+  margin-bottom: 9px;
+}
+
+.home-tool-card a {
+  margin-top: 0;
+}
+
+@media (max-width: 700px) {
+  .home-tool-grid {
+    gap: 15px;
+  }
+
+  .home-tool-card {
+    min-height: 0;
+    padding: 21px 20px 17px;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - SEMUA HEADER HALAMAN SERAGAM
+   ===================================================== */
+
+/* KOTAK HEADER UNTUK SEMUA HALAMAN UTAMA */
+.page-intro,
+.result-intro,
+.citation-intro,
+.decl-intro {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 32px 36px;
+  margin: 0 0 34px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--coral);
+  border-radius: 17px;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #fbfaf5 100%
+  );
+  box-shadow: var(--ethic-shadow);
+}
+
+/* JUDUL UTAMA SERAGAM */
+.page-intro h1,
+.result-intro h1,
+.citation-intro h1,
+.decl-intro h1 {
+  margin: 0;
+  color: var(--green);
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+}
+
+/* DESKRIPSI DI BAWAH JUDUL */
+.page-intro .intro-copy,
+.result-intro .intro-copy,
+.citation-intro > p:last-child,
+.decl-intro .intro-copy {
+  max-width: 720px;
+  margin: 17px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+/* KETERANGAN CHECKLIST BERBENTUK KAPSUL */
+.page-intro .meta-pills,
+.result-intro .meta-pills {
+  margin-top: 20px;
+}
+
+/* KHUSUS DESKTOP: JUDUL DEKLARASI SATU BARIS */
+@media (min-width: 1000px) {
+  .decl-intro h1 {
+    white-space: nowrap;
+  }
+}
+
+/* RESPONSIVE TABLET */
+@media (max-width: 900px) {
+  .page-intro,
+  .result-intro,
+  .citation-intro,
+  .decl-intro {
+    padding: 27px;
+  }
+}
+
+/* RESPONSIVE HP */
+@media (max-width: 700px) {
+  .page-intro,
+  .result-intro,
+  .citation-intro,
+  .decl-intro {
+    padding: 23px 20px;
+    margin-bottom: 25px;
+    border-radius: 13px;
+  }
+
+  .page-intro h1,
+  .result-intro h1,
+  .citation-intro h1,
+  .decl-intro h1 {
+    font-size: clamp(27px, 7vw, 36px);
+    line-height: 1.25;
+    letter-spacing: -1px;
+  }
+
+  .page-intro .intro-copy,
+  .result-intro .intro-copy,
+  .citation-intro > p:last-child,
+  .decl-intro .intro-copy {
+    font-size: 11px;
+  }
+
+  .decl-intro h1 {
+    white-space: normal;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - PENYAMAAN LEBAR SEMUA HEADER
+   ===================================================== */
+
+/* Samakan lebar header Checklist, Hasil, dan Pernyataan
+   dengan container Generator Sitasi */
+
+.page-intro.content-width,
+.result-intro.content-width,
+.decl-intro.content-width {
+  width: min(1100px, calc(100% - 64px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Tampilan HP */
+@media (max-width: 700px) {
+  .page-intro.content-width,
+  .result-intro.content-width,
+  .decl-intro.content-width {
+    width: min(calc(100% - 36px), 520px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - SEMUA IKON PANAH GOOGLE FONTS
+   ===================================================== */
+
+.material-symbols-rounded.tool-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit !important;
+  background: transparent !important;
+  font-family: "Material Symbols Rounded";
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: normal;
+  white-space: nowrap;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 500,
+    "GRAD" 0,
+    "opsz" 24;
+  vertical-align: middle;
+  transition: opacity .22s ease;
+}
+
+/* Hover tanpa menggeser posisi panah */
+a:hover .tool-arrow,
+button:hover .tool-arrow {
+  color: inherit !important;
+  background: transparent !important;
+  transform: none !important;
+  opacity: .7;
+}
+
+/* Menjaga posisi ikon tetap stabil */
+a .tool-arrow,
+button .tool-arrow {
+  position: relative;
+  transform: none;
+}
+
+
+
+/* =====================================================
+   ETHICAI - JARAK ATAS BAGIAN DOS AND DONTS
+   ===================================================== */
+
+.guide-dos-donts {
+  padding-top: 65px;
+}
+
+@media (max-width: 700px) {
+  .guide-dos-donts {
+    padding-top: 45px;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - IKON GOOGLE FONTS PADA DO AND DONT
+   ===================================================== */
+
+/* IKON PADA JUDUL KARTU */
+.guide-dos-card h3 .guide-action-icon,
+.guide-donts-card h3 .guide-action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  margin-right: 7px;
+  font-family: "Material Symbols Rounded";
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 500,
+    "GRAD" 0,
+    "opsz" 24;
+  vertical-align: middle;
+}
+
+.guide-dos-card h3 .guide-action-icon {
+  color: var(--green);
+}
+
+.guide-donts-card h3 .guide-action-icon {
+  color: var(--coral);
+}
+
+/* IKON PADA SETIAP POIN */
+.guide-dos-card p::before,
+.guide-donts-card p::before {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  font-family: "Material Symbols Rounded";
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 500,
+    "GRAD" 0,
+    "opsz" 20;
+}
+
+.guide-dos-card p::before {
+  content: "check";
+  color: var(--green);
+}
+
+.guide-donts-card p::before {
+  content: "close";
+  color: var(--coral);
+}
+
+
+
+/* =====================================================
+   ETHICAI - PENYERAGAMAN FONT JUDUL HEADER
+   ===================================================== */
+
+.page-intro h1,
+.result-intro h1,
+.citation-intro h1,
+.decl-intro h1 {
+  font-family: var(--font) !important;
+  font-size: clamp(32px, 4vw, 44px) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -1.5px !important;
+  color: var(--green) !important;
+}
+
+@media (min-width: 1000px) {
+  .decl-intro h1 {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-intro h1,
+  .result-intro h1,
+  .citation-intro h1,
+  .decl-intro h1 {
+    font-size: clamp(27px, 7vw, 36px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -1px !important;
+  }
+
+  .decl-intro h1 {
+    white-space: normal;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - PENYERAGAMAN FONT DESKRIPSI HEADER
+   ===================================================== */
+
+.citation-intro > p:last-child,
+.decl-intro > p.intro-copy {
+  font-family: var(--font) !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.9 !important;
+  letter-spacing: normal !important;
+  color: var(--muted) !important;
+  margin: 17px 0 0 !important;
+}
+
+@media (max-width: 700px) {
+  .citation-intro > p:last-child,
+  .decl-intro > p.intro-copy {
+    font-size: 11px !important;
+  }
+}
+
+
+
+/* =====================================================
+   ETHICAI - PENYERAGAMAN SELURUH DESKRIPSI HEADER FINAL
+   ===================================================== */
+
+.page-intro .intro-copy,
+.result-intro .intro-copy,
+.citation-intro > p:last-child,
+.decl-intro > p.intro-copy {
+  font-family: var(--font) !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.9 !important;
+  letter-spacing: normal !important;
+  color: var(--muted) !important;
+  margin: 17px 0 0 !important;
+}
+
+@media (max-width: 700px) {
+  .page-intro .intro-copy,
+  .result-intro .intro-copy,
+  .citation-intro > p:last-child,
+  .decl-intro > p.intro-copy {
+    font-size: 11px !important;
+  }
+}
+
