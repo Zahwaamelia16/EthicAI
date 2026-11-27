@@ -454,53 +454,53 @@ if (window.lucide) {
 
   }
 
-// Format tanggal IEEE
-function formatEnglishDate(date) {
-  const dateObject = new Date(date + "T00:00:00");
+  // Format tanggal IEEE
+  function formatEnglishDate(date) {
+    const dateObject = new Date(date + "T00:00:00");
 
-  const months = [
-    "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
-    "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."
-  ];
+    const months = [
+      "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
+      "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."
+    ];
 
-  return `${months[dateObject.getMonth()]} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
-}
-
-// Membuat sitasi APA 7
-function generateAPA(data) {
-  const author = data.developer || data.toolName;
-  const title = data.version || data.toolName;
-  const year = data.date.slice(0, 4);
-
-  let citation =
-    `${author}. (${year}). ${title} [Large language model].`;
-
-  if (data.url) {
-    citation += ` ${data.url}`;
+    return `${months[dateObject.getMonth()]} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
   }
 
-  return citation;
-}
+  // Membuat sitasi APA 7
+  function generateAPA(data) {
+    const author = data.developer || data.toolName;
+    const title = data.version || data.toolName;
+    const year = data.date.slice(0, 4);
 
-// Membuat sitasi IEEE
-function generateIEEE(data) {
-  const author = data.developer || data.toolName;
+    let citation =
+      `${author}. (${year}). ${title} [Large language model].`;
 
-  const title = data.version
-    ? `${data.toolName} (${data.version})`
-    : data.toolName;
+    if (data.url) {
+      citation += ` ${data.url}`;
+    }
 
-  const accessDate = formatEnglishDate(data.date);
-
-  let citation =
-    `[1] ${title}, ${author}. Accessed: ${accessDate}. [Online].`;
-
-  if (data.url) {
-    citation += ` Available: ${data.url}`;
+    return citation;
   }
 
-  return citation;
-}
+  // Membuat sitasi IEEE
+  function generateIEEE(data) {
+    const author = data.developer || data.toolName;
+
+    const title = data.version
+      ? `${data.toolName} (${data.version})`
+      : data.toolName;
+
+    const accessDate = formatEnglishDate(data.date);
+
+    let citation =
+      `[1] ${title}, ${author}. Accessed: ${accessDate}. [Online].`;
+
+    if (data.url) {
+      citation += ` Available: ${data.url}`;
+    }
+
+    return citation;
+  }
 
   // Proses membuat dan menyimpan sitasi
   async function createCitation() {
@@ -786,7 +786,23 @@ function generateIEEE(data) {
   const header = document.getElementById("siteHeader");
   const footer = document.getElementById("siteFooter");
 
-  function openDeclarationPage() {
+  const checklistBanner = document.getElementById("declChecklistBanner");
+  const sampleBtn = document.getElementById("fillSampleBtn");
+  const styleButtons = document.querySelectorAll(".decl-style-btn");
+
+  const form = document.getElementById("declarationForm");
+  const resetBtn = document.getElementById("resetDeclBtn");
+  const emptyStateCard = document.getElementById("declEmptyStateCard");
+  const resultStateCard = document.getElementById("declResultStateCard");
+  const declarationOutput = document.getElementById("declarationOutput");
+  const copyBtn = document.getElementById("copyDeclBtn");
+  const regenerateBtn = document.getElementById("regenerateDeclBtn");
+  const copyBadge = document.getElementById("declCopyBadge");
+
+  const styleOrder = ["standard", "formal", "english"];
+  let currentStyle = "standard";
+
+  function openDeclarationPage(event) {
     if (checklistView) checklistView.classList.add("is-hidden");
     if (resultView) resultView.classList.add("is-hidden");
     if (citationView) citationView.classList.add("is-hidden");
@@ -798,6 +814,24 @@ function generateIEEE(data) {
 
     if (checklistNav) checklistNav.classList.remove("active");
     if (generatorNav) generatorNav.classList.add("active");
+
+    // Tampilkan catatan sinkronisasi jika user datang dari hasil Checklist
+    if (checklistBanner && event && event.detail && Array.isArray(event.detail.answers)) {
+      const userAnswers = event.detail.answers;
+      const answeredCount = userAnswers.filter((a) => a !== null).length;
+
+      if (answeredCount > 0) {
+        const yesCount = userAnswers.filter((a) => a === "yes").length;
+        const missedCategories = (event.detail.questions || [])
+          .filter((_, idx) => userAnswers[idx] === "no")
+          .map((q) => q.category);
+
+        checklistBanner.textContent = missedCategories.length > 0
+          ? `Catatan dari Checklist (${yesCount}/${answeredCount} terpenuhi): pastikan aspek ${missedCategories.join(", ")} sudah kamu periksa sebelum menyerahkan tugas.`
+          : `Hasil Checklist (${yesCount}/${answeredCount} terpenuhi): seluruh indikator transparansi sudah baik, lanjutkan menyusun deklarasimu di bawah.`;
+        checklistBanner.classList.remove("is-hidden");
+      }
+    }
 
     history.replaceState(null, "", "#declaration");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -823,22 +857,54 @@ function generateIEEE(data) {
     }
   }, true);
 
-  // Logika Form & Generator Teks Deklarasi
-  const form = document.getElementById("declarationForm");
-  const resetBtn = document.getElementById("resetDeclBtn");
-  const emptyStateCard = document.getElementById("declEmptyStateCard");
-  const resultStateCard = document.getElementById("declResultStateCard");
-  const declarationOutput = document.getElementById("declarationOutput");
-  const copyBtn = document.getElementById("copyDeclBtn");
-  const regenerateBtn = document.getElementById("regenerateDeclBtn");
-  const copyBadge = document.getElementById("declCopyBadge");
+  // Quick-fill chips pada form Deklarasi
+  declarationView.querySelectorAll(".decl-chips").forEach((group) => {
+    const targetInput = document.getElementById(group.dataset.target);
+    const mode = group.dataset.mode;
+    if (!targetInput) return;
 
-  let variantIndex = 0;
+    group.querySelectorAll(".decl-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const cleanChipText = chip.textContent.replace(/^\+\s*/, "").trim();
+        if (mode === "append") {
+          const existingItems = targetInput.value
+            .split(",")
+            .map((item) => item.trim())
+            .filter(Boolean);
 
+          const alreadyExists = existingItems.some(
+            (item) => item.toLowerCase() === cleanChipText.toLowerCase()
+          );
+
+          if (!alreadyExists) {
+            existingItems.push(cleanChipText);
+            targetInput.value = existingItems.join(", ");
+          }
+        } else {
+          targetInput.value = cleanChipText;
+        }
+        targetInput.focus();
+      });
+    });
+  });
+
+  // Tombol "Isi contoh" untuk memudahkan demo / uji coba cepat
+  if (sampleBtn) {
+    sampleBtn.addEventListener("click", () => {
+      document.getElementById("aiTools").value = "ChatGPT, Gemini";
+      document.getElementById("aiPurpose").value = "memahami konsep dasar materi dan mengeksplorasi sudut pandang awal";
+      document.getElementById("aiAssistance").value = "brainstorming ide, penyusunan kerangka, penyuntingan tata bahasa";
+      document.getElementById("taskPart").value = "penyusunan kerangka Bab 1 dan pengecekan kejelasan abstrak";
+      document.getElementById("humanReview").value = "Saya memverifikasi seluruh fakta dan referensi melalui jurnal akademik serta menulis ulang seluruh isi dengan bahasa sendiri";
+
+      if (typeof showToast === "function") {
+        showToast("Contoh pengisian berhasil dimuat.");
+      }
+    });
+  }
 
   // Menyimpan hasil deklarasi ke Firebase
   async function saveDeclarationToFirebase() {
-
     if (typeof window.simpanHasilDeklarasi !== "function") {
       console.error("Fungsi Firebase simpanHasilDeklarasi belum tersedia.");
       showToast("Koneksi Firebase belum siap.");
@@ -858,26 +924,18 @@ function generateIEEE(data) {
       taskPart: document.getElementById("taskPart").value.trim(),
       humanReview: document.getElementById("humanReview").value.trim(),
       declaration: declarationText,
-      variant: (variantIndex % 2) + 1
+      style: currentStyle
     };
 
     try {
-
-      const documentId = await window.simpanHasilDeklarasi(
-        declarationData
-      );
-
+      const documentId = await window.simpanHasilDeklarasi(declarationData);
       console.log("Deklarasi berhasil disimpan:", documentId);
       showToast("Deklarasi berhasil disimpan ke database!");
-
     } catch (error) {
-
       console.error("Gagal menyimpan deklarasi:", error);
       showToast("Deklarasi berhasil dibuat, tetapi gagal disimpan ke database.");
-
     }
   }
-
 
   function cleanEnding(text) {
     return text.trim().replace(/[.?!,]+$/, "");
@@ -898,61 +956,83 @@ function generateIEEE(data) {
     return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
   }
 
-  function generateDeclarationText() {
+  function setActiveStyleButton(style) {
+    currentStyle = style;
+    styleButtons.forEach((btn) => {
+      btn.classList.toggle("is-active", btn.dataset.style === style);
+    });
+  }
+
+  function generateDeclarationText(style = currentStyle) {
     const tools = cleanEnding(document.getElementById("aiTools").value);
     const purpose = toMidSentence(document.getElementById("aiPurpose").value);
     const assistance = toMidSentence(document.getElementById("aiAssistance").value);
     const taskPart = toMidSentence(document.getElementById("taskPart").value).replace(/^bagian\s+/i, "");
     const review = toStartSentence(document.getElementById("humanReview").value);
 
-    const templates = [
-      {
-        p1: `Saya menggunakan ${tools} untuk ${purpose}. Bantuan AI mencakup ${assistance}, serta ${taskPart}.`,
-        p2: `${review}. Saya bertanggung jawab atas isi, keakuratan, dan orisinalitas tugas akhir ini.`
+    const templates = {
+      standard: {
+        p1: `Saya menggunakan ${tools} untuk ${purpose}. Bantuan AI mencakup ${assistance}, khususnya pada bagian ${taskPart}.`,
+        p2: `${review}. Saya bertanggung jawab atas isi, keakuratan, dan orisinalitas tugas akhir ini.`,
+        note: "Tinjau dan sesuaikan sebelum dimasukkan ke tugas"
       },
-      {
-        p1: `Dalam penyusunan tugas ini, saya memanfaatkan ${tools} guna ${purpose}, khususnya melalui ${assistance} pada bagian ${taskPart}.`,
-        p2: `${review}. Seluruh substansi, validasi sumber, dan keaslian karya ini sepenuhnya menjadi tanggung jawab saya.`
+      formal: {
+        p1: `Pernyataan Penggunaan Kecerdasan Buatan: Dalam penyusunan karya akademik ini, penulis memanfaatkan ${tools} guna ${purpose}, dengan bentuk bantuan berupa ${assistance} pada bagian ${taskPart}.`,
+        p2: `${review}. Seluruh substansi, validasi sumber ilmiah, serta keaslian karya ini sepenuhnya menjadi tanggung jawab akademik penulis.`,
+        note: "Sesuaikan dengan format pernyataan akademik dosen atau kampus"
+      },
+      english: {
+        p1: `AI Usage Declaration: During the preparation of this work, the author used ${tools} to ${purpose}, specifically for ${assistance} in ${taskPart}.`,
+        p2: `${review}. After using this tool, the author reviewed and edited the content as needed and takes full responsibility for the accuracy and originality of the final work.`,
+        note: "Review and adapt to match your course or institutional guidelines"
       }
-    ];
+    };
 
-    const selected = templates[variantIndex % templates.length];
+    const selected = templates[style] || templates.standard;
 
     return `
       <p>${selected.p1}</p>
       <p>${selected.p2}</p>
-      <p class="decl-box-note" contenteditable="false">Tinjau dan sesuaikan sebelum dimasukkan ke tugas</p>
+      <p class="decl-box-note" contenteditable="false">${selected.note}</p>
     `;
   }
 
-
-if (form) {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    variantIndex = 0;
-    declarationOutput.innerHTML = generateDeclarationText();
-
-    emptyStateCard.classList.add("is-hidden");
-    resultStateCard.classList.remove("is-hidden");
-    copyBadge.classList.add("is-hidden");
-
-    // Simpan hasil deklarasi ke Firebase
-    await saveDeclarationToFirebase();
+  styleButtons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      setActiveStyleButton(btn.dataset.style);
+      declarationOutput.innerHTML = generateDeclarationText(currentStyle);
+      copyBadge.classList.add("is-hidden");
+      await saveDeclarationToFirebase();
+    });
   });
-}
 
-if (regenerateBtn) {
-  regenerateBtn.addEventListener("click", async () => {
-    variantIndex += 1;
-    declarationOutput.innerHTML = generateDeclarationText();
-    copyBadge.classList.add("is-hidden");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    // Simpan versi deklarasi terbaru ke Firebase
-    await saveDeclarationToFirebase();
-  });
-}
+      setActiveStyleButton("standard");
+      declarationOutput.innerHTML = generateDeclarationText("standard");
 
+      emptyStateCard.classList.add("is-hidden");
+      resultStateCard.classList.remove("is-hidden");
+      copyBadge.classList.add("is-hidden");
+
+      // Simpan hasil deklarasi ke Firebase
+      await saveDeclarationToFirebase();
+    });
+  }
+
+  if (regenerateBtn) {
+    regenerateBtn.addEventListener("click", async () => {
+      const nextIndex = (styleOrder.indexOf(currentStyle) + 1) % styleOrder.length;
+      setActiveStyleButton(styleOrder[nextIndex]);
+      declarationOutput.innerHTML = generateDeclarationText(currentStyle);
+      copyBadge.classList.add("is-hidden");
+
+      // Simpan versi deklarasi terbaru ke Firebase
+      await saveDeclarationToFirebase();
+    });
+  }
 
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
@@ -981,9 +1061,11 @@ if (regenerateBtn) {
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       form.reset();
+      setActiveStyleButton("standard");
       resultStateCard.classList.add("is-hidden");
       emptyStateCard.classList.remove("is-hidden");
       copyBadge.classList.add("is-hidden");
+      if (checklistBanner) checklistBanner.classList.add("is-hidden");
     });
   }
 })();
@@ -1182,7 +1264,7 @@ if (regenerateBtn) {
   }, true);
 
   // Menangani tombol deklarasi dari halaman hasil checklist
-  window.addEventListener("ethicai:open-generator", () => {
+  window.addEventListener("ethicai:open-generator", (event) => {
 
     showEthicAIPage("declaration", {
       hash: "#declaration"

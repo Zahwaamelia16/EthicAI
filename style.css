@@ -2630,3 +2630,96 @@ h1, h2, h3, p { overflow-wrap: break-word; }
 .home-learning-caption {
   display: none;
 }
+
+/* =========================================================
+   TAMBAHAN UX FORM & STYLE SWITCHER DEKLARASI AI
+   ========================================================= */
+
+.decl-form-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.decl-sample-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--green);
+  background: var(--pale);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .18s ease, border-color .18s ease;
+}
+
+.decl-sample-btn:hover {
+  border-color: var(--green);
+  background: #eae7da;
+}
+
+.decl-checklist-banner {
+  padding: 11px 13px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--coral);
+  border-radius: 8px;
+  color: var(--green-text);
+  background: #faf9f4;
+  font-size: 9.5px;
+  line-height: 1.65;
+}
+
+.decl-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.decl-chip {
+  padding: 4px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--green-text);
+  background: #faf9f4;
+  font-size: 9.5px;
+  line-height: 1.4;
+  text-align: left;
+  transition: border-color .18s ease, background .18s ease;
+}
+
+.decl-chip:hover {
+  border-color: var(--green);
+  background: #eff4f0;
+}
+
+.decl-style-switcher {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.decl-style-btn {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--green);
+  background: var(--white);
+  font-size: 10px;
+  font-weight: 600;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+
+.decl-style-btn:hover {
+  border-color: var(--green);
+  background: #eff4f0;
+}
+
+.decl-style-btn.is-active {
+  border-color: var(--green);
+  color: var(--white);
+  background: var(--green);
+}

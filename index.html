@@ -572,6 +572,7 @@
   </section>
 
 </section>
+
     <!-- BAGIAN CHECKLIST -->
     <section class="checklist-page page-view" id="checklistView" aria-labelledby="pageTitle">
       <div class="page-intro content-width">
@@ -990,9 +991,19 @@
       <div class="decl-layout content-width">
         <!-- KOLOM KIRI: FORM INPUT -->
         <section class="decl-form-card" aria-label="Form detail penggunaan AI">
-          <p class="decl-step-label">01 / CERITAKAN PROSESMU</p>
-          <h2>Detail penggunaan AI</h2>
-          <p class="decl-required-note">* Informasi wajib diisi</p>
+          <div class="decl-form-head">
+            <div>
+              <p class="decl-step-label">01 / CERITAKAN PROSESMU</p>
+              <h2>Detail penggunaan AI</h2>
+              <p class="decl-required-note">* Informasi wajib diisi</p>
+            </div>
+            <button type="button" class="decl-sample-btn" id="fillSampleBtn">
+              Isi contoh
+            </button>
+          </div>
+
+          <!-- BANNER OTOMATIS JIKA ADA CATATAN DARI CHECKLIST -->
+          <div class="decl-checklist-banner is-hidden" id="declChecklistBanner" role="status"></div>
 
           <form id="declarationForm">
             <div class="decl-field">
@@ -1000,10 +1011,16 @@
               <input
                 type="text"
                 id="aiTools"
-                placeholder="Contoh: ChatGPT, Gemini, Midjourney"
+                placeholder="Contoh: ChatGPT, Gemini, Grammarly"
                 required
               />
-              <small>Cantumkan seluruh tool yang berkontribusi</small>
+              <div class="decl-chips" data-target="aiTools" data-mode="append">
+                <button type="button" class="decl-chip">+ ChatGPT</button>
+                <button type="button" class="decl-chip">+ Gemini</button>
+                <button type="button" class="decl-chip">+ Claude</button>
+                <button type="button" class="decl-chip">+ Grammarly</button>
+              </div>
+              <small>Klik pilihan cepat di atas atau ketik nama tool secara manual</small>
             </div>
 
             <div class="decl-field">
@@ -1011,10 +1028,15 @@
               <textarea
                 id="aiPurpose"
                 rows="2"
-                placeholder="Jelaskan tujuan penggunaan AI..."
+                placeholder="Contoh: memahami konsep dasar topik dan merapikan struktur tulisan"
                 required
               ></textarea>
-              <small>Mengapa kamu menggunakan tool ini?</small>
+              <div class="decl-chips" data-target="aiPurpose" data-mode="replace">
+                <button type="button" class="decl-chip">memahami konsep materi</button>
+                <button type="button" class="decl-chip">mencari inspirasi sudut pandang</button>
+                <button type="button" class="decl-chip">memperbaiki kejelasan bahasa</button>
+              </div>
+              <small>Alasan utama kamu memakai tool tersebut dalam tugas ini</small>
             </div>
 
             <div class="decl-field">
@@ -1022,10 +1044,16 @@
               <input
                 type="text"
                 id="aiAssistance"
-                placeholder="Contoh: brainstorming, penyuntingan..."
+                placeholder="Contoh: brainstorming ide, penyusunan kerangka, penyuntingan"
                 required
               />
-              <small>Jelaskan bantuan, bukan hanya nama tool</small>
+              <div class="decl-chips" data-target="aiAssistance" data-mode="append">
+                <button type="button" class="decl-chip">+ brainstorming ide</button>
+                <button type="button" class="decl-chip">+ penyusunan kerangka</button>
+                <button type="button" class="decl-chip">+ penyuntingan tata bahasa</button>
+                <button type="button" class="decl-chip">+ ringkasan bacaan</button>
+              </div>
+              <small>Jenis aktivitas yang dibantu oleh AI (bisa pilih lebih dari satu)</small>
             </div>
 
             <div class="decl-field">
@@ -1033,10 +1061,15 @@
               <input
                 type="text"
                 id="taskPart"
-                placeholder="Sebutkan bagian tugas yang dibantu..."
+                placeholder="Contoh: penyusunan kerangka Bab 1 dan pengecekan abstrak"
                 required
               />
-              <small>Tentukan bagian atau tahap pengerjaannya</small>
+              <div class="decl-chips" data-target="taskPart" data-mode="replace">
+                <button type="button" class="decl-chip">tahap awal brainstorming</button>
+                <button type="button" class="decl-chip">penyusunan kerangka Bab 1</button>
+                <button type="button" class="decl-chip">pengecekan tata bahasa akhir</button>
+              </div>
+              <small>Tahap pengerjaan atau bab spesifik yang menggunakan bantuan AI</small>
             </div>
 
             <div class="decl-field">
@@ -1044,10 +1077,14 @@
               <textarea
                 id="humanReview"
                 rows="3"
-                placeholder="Ceritakan proses verifikasi dan revisimu..."
+                placeholder="Contoh: Saya memeriksa kembali seluruh fakta dengan referensi jurnal dan menulis ulang isinya dengan bahasa sendiri"
                 required
               ></textarea>
-              <small>Jelaskan bagaimana kamu meninjau hasil AI</small>
+              <div class="decl-chips" data-target="humanReview" data-mode="replace">
+                <button type="button" class="decl-chip">Saya memverifikasi seluruh fakta ke sumber akademik dan menulis ulang dengan bahasa sendiri</button>
+                <button type="button" class="decl-chip">Saya meninjau ulang setiap saran AI dan menyesuaikan isinya dengan analisis pribadi</button>
+              </div>
+              <small>Langkah verifikasi yang kamu lakukan agar hasil tetap akurat dan orisinal</small>
             </div>
 
             <div class="decl-form-actions">
@@ -1085,7 +1122,13 @@
           <div class="decl-result-card is-hidden" id="declResultStateCard" aria-live="polite">
             <p class="decl-step-label">02 / HASIL GENERATOR</p>
             <h2>Deklarasi penggunaan AI</h2>
-            <p class="decl-result-sub">DEKLARASI PRIBADI · OTOMATIS BERDASARKAN INPUT</p>
+            <p class="decl-result-sub">PILIH GAYA BAHASA · KLIK TEKS UNTUK EDIT MANUAL</p>
+
+            <div class="decl-style-switcher" role="group" aria-label="Pilih gaya bahasa deklarasi">
+              <button type="button" class="decl-style-btn is-active" data-style="standard">Standar</button>
+              <button type="button" class="decl-style-btn" data-style="formal">Formal</button>
+              <button type="button" class="decl-style-btn" data-style="english">English</button>
+            </div>
 
             <div class="decl-editable-box" id="declarationOutput" contenteditable="true" spellcheck="false"></div>
 
@@ -1095,7 +1138,7 @@
 
             <div class="decl-result-actions">
               <button class="button button-coral" id="copyDeclBtn" type="button">Copy Declaration</button>
-              <button class="button button-outline" id="regenerateDeclBtn" type="button">Regenerate</button>
+              <button class="button button-outline" id="regenerateDeclBtn" type="button">Ganti Gaya</button>
             </div>
           </div>
 
