@@ -108,11 +108,11 @@
         <span>3. CANTUMKAN SUMBER DENGAN TEPAT</span>
       </div>
       <div class="home-highlight-body">
-        <h3>Sitasi AI Akademik</h3>
-        <p>OpenAI. (2026). ChatGPT.</p>
-        <p>Catat alat AI, model, dan tanggal penggunaan secara jelas.</p>
-        <p>APA / IEEE</p>
-      </div>
+      <h3>Generator Sitasi Referensi Akademik</h3>
+      <p>Jurnal, buku, website, dan prosiding.</p>
+      <p>Buat sitasi dan daftar pustaka secara otomatis berdasarkan informasi sumber akademik.</p>
+      <p>APA 7 / IEEE</p>
+    </div>
     </article>
 
   </section>
@@ -577,7 +577,7 @@
 </section>
 
     <!-- BAGIAN CHECKLIST -->
-    <section class="checklist-page page-view" id="checklistView" aria-labelledby="pageTitle">
+    <section class="checklist-page page-view is-hidden" id="checklistView" aria-labelledby="pageTitle">
       <div class="page-intro content-width">
         <p class="eyebrow">SAATNYA MENINJAU PENGGUNAAN AI</p>
         <h1 id="pageTitle">Daftar Periksa Transparansi AI</h1>
@@ -711,270 +711,297 @@
       </div>
     </section>
 
-    <!-- BAGIAN GENERATOR SITASI AI -->
-    <section class="citation-generator page-view is-hidden" id="generator">
-      <div class="citation-container">
-        <!-- JUDUL HALAMAN -->
-        <div class="citation-intro">
-          <p class="citation-eyebrow">TUNJUKKAN PROSES PENGGUNAAN AI</p>
-          <h1>Pembuat Sitasi AI</h1>
-          <p>Catat sumber bantuan AI dengan jelas, Pilih format sitasi yang sesuai kebutuhanmu</p>
+    
+<!-- BAGIAN GENERATOR SITASI REFERENSI AKADEMIK -->
+<section class="citation-generator page-view is-hidden" id="generator">
+
+  <div class="citation-container">
+
+    <!-- JUDUL HALAMAN -->
+    <div class="citation-intro">
+      <p class="citation-eyebrow">SUPPORT YOUR ACADEMIC WORK</p>
+      <h1>Academic Citation Generator</h1>
+      <p>
+        Buat sitasi dan daftar pustaka dari berbagai sumber referensi
+        akademik dengan format APA 7 atau IEEE.
+      </p>
+    </div>
+
+    <!-- TAB GENERATOR -->
+    <div class="citation-tabs">
+      <a href="#declaration" class="citation-tab">
+        Deklarasi Penggunaan AI
+      </a>
+
+      <a href="#generator" class="citation-tab active">
+        Academic Citation Generator
+      </a>
+    </div>
+
+    <div class="citation-layout">
+
+      <!-- BAGIAN KIRI: FORM INPUT -->
+      <form class="citation-form" id="academicCitationForm">
+
+        <p class="citation-step">01 / INFORMASI REFERENSI</p>
+        <h2>Detail sumber akademik</h2>
+        <p class="citation-required">* Informasi wajib diisi</p>
+
+        <!-- JENIS SUMBER -->
+        <div class="citation-field">
+          <label for="academicSourceType">Jenis sumber *</label>
+
+          <select id="academicSourceType" required>
+            <option value="journal">Artikel Jurnal</option>
+            <option value="book">Buku</option>
+            <option value="website">Website</option>
+            <option value="conference">Prosiding Konferensi</option>
+          </select>
+
+          <small>Pilih jenis sumber referensi yang digunakan.</small>
         </div>
 
-        <!-- TAB GENERATOR -->
-        <div class="citation-tabs">
-          <a href="#declaration" class="citation-tab">
-            Deklarasi Penggunaan AI
-          </a>
+        <!-- FORM INPUT DINAMIS -->
+        <div id="academicDynamicFields"></div>
 
-          <a href="#generator" class="citation-tab active">
-            Pembuat Sitasi AI
-          </a>
-        </div>
+        <!-- FORMAT SITASI -->
+        <div class="citation-field">
+          <label>Format sitasi *</label>
 
-        <div class="citation-layout">
-          <!-- BAGIAN KIRI: FORM INPUT -->
-          <form class="citation-form" id="citationForm">
-            <p class="citation-step">01 / INFORMASI SITASI</p>
-            <h2>Detail tool AI</h2>
-            <p class="citation-required">* Informasi wajib diisi</p>
+          <div class="citation-format">
 
-            <!-- NAMA TOOL -->
-            <div class="citation-field">
-              <label for="toolName">Nama alat AI *</label>
+            <label class="format-option">
               <input
-                type="text"
-                id="toolName"
-                placeholder="Contoh: Gemini"
-                required
+                type="radio"
+                name="academicFormat"
+                value="APA"
+                checked
               />
-              <small>Gunakan nama resmi alat AI</small>
-            </div>
+              <span>APA 7</span>
+            </label>
 
-            <!-- PENGEMBANG DAN VERSI -->
-            <div class="citation-row">
-              <div class="citation-field">
-                <label for="developer">Pengembang / penyedia</label>
-                <input
-                  type="text"
-                  id="developer"
-                  placeholder="Contoh: Google"
-                />
-                <small>Jika diketahui</small>
-              </div>
-
-              <div class="citation-field">
-                <label for="version">Versi / model</label>
-                <input
-                  type="text"
-                  id="version"
-                  placeholder="Contoh: Gemini 2.5 Flash"
-                />
-                <small>Jika tersedia</small>
-              </div>
-            </div>
-
-            <!-- TANGGAL -->
-            <div class="citation-field">
-              <label for="usageDate">Tanggal penggunaan *</label>
+            <label class="format-option">
               <input
-                type="date"
-                id="usageDate"
-                required
+                type="radio"
+                name="academicFormat"
+                value="IEEE"
               />
-              <small>Tanggal saat tool digunakan</small>
-            </div>
+              <span>IEEE</span>
+            </label>
 
-            <!-- TUJUAN -->
-            <div class="citation-field">
-              <label for="purpose">Tujuan penggunaan AI *</label>
-              <textarea
-                id="purpose"
-                rows="2"
-                placeholder="Jelaskan konteks penggunaan..."
-                required
-              ></textarea>
-              <small>Disimpan sebagai catatan transparansi</small>
-            </div>
-
-            <!-- URL -->
-            <div class="citation-field">
-              <label for="toolUrl">Tautan resmi alat AI (opsional)</label>
-              <input
-                type="url"
-                id="toolUrl"
-                placeholder="https://gemini.google.com"
-              />
-              <small>Masukkan tautan resmi alat AI</small>
-            </div>
-
-            <!-- FORMAT SITASI -->
-            <div class="citation-field">
-              <label>Format sitasi *</label>
-
-              <div class="citation-format">
-                <label class="format-option">
-                  <input
-                    type="radio"
-                    name="citationFormat"
-                    value="APA"
-                    checked
-                  />
-                  <span>APA</span>
-                </label>
-
-                <label class="format-option">
-                  <input
-                    type="radio"
-                    name="citationFormat"
-                    value="IEEE"
-                  />
-                  <span>IEEE</span>
-                </label>
-              </div>
-
-              <small>Periksa pedoman kampus untuk format yang diminta</small>
-            </div>
-
-            <!-- TOMBOL FORM -->
-            <div class="citation-buttons">
-              <button type="submit" class="citation-generate">
-                Buat Sitasi <span class="material-symbols-rounded tool-arrow" aria-hidden="true">arrow_forward</span>
-              </button>
-
-              <button type="reset" class="citation-reset">
-                Kosongkan Formulir
-              </button>
-            </div>
-          </form>
-
-          <!-- BAGIAN KANAN: PREVIEW DAN HASIL SITASI -->
-          <div class="citation-result-area">
-            <!-- TAMPILAN AWAL: PREVIEW HIJAU -->
-            <section class="citation-preview-card" id="previewContent">
-              <p class="citation-step">
-                02 / PRATINJAU DOKUMEN
-              </p>
-
-              <h2>
-                Cantumkan Alat yang Digunakan<br />
-                Tetap Kendalikan Pemikiranmu
-              </h2>
-
-              <p class="preview-description">
-                Sitasi membantu pembaca mengenali alat AI yang kamu gunakan,
-                Informasi model, tanggal, dan pedoman institusi menentukan
-                detail penulisannya
-              </p>
-
-              <div class="preview-steps">
-                <p>01 / Nama pengembang dan alat AI</p>
-                <p>02 / Tahun dan versi atau model</p>
-                <p>03 / Format APA atau IEEE</p>
-              </div>
-
-              <p class="preview-footer">
-                Isi formulir di samping untuk menyiapkan hasilmu
-              </p>
-            </section>
-
-            <!-- TAMPILAN SETELAH GENERATE: CARD HASIL -->
-            <section class="citation-result-card" id="resultContent" hidden>
-              <p class="citation-step">
-                02 / HASIL GENERATOR
-              </p>
-
-              <h2>Sitasi penggunaan AI</h2>
-
-              <p class="citation-format-label" id="resultFormat">
-                FORMAT APA · CONTOH BERDASARKAN ISIAN
-              </p>
-
-              <div class="citation-output">
-                <textarea
-                  id="citationText"
-                  rows="3"
-                  aria-label="Hasil sitasi"
-                  spellcheck="false"
-                ></textarea>
-
-                <p id="usageNote" class="citation-usage-note"></p>
-              </div>
-
-              <p class="citation-edit-hint">
-                TEKS YANG DAPAT DISUNTING / Sesuaikan dengan prosesmu
-              </p>
-
-              <div class="citation-result-buttons">
-                <button
-                  type="button"
-                  class="citation-copy"
-                  id="copyCitation"
-                >
-                  Salin Sitasi
-                </button>
-
-                <button
-                  type="button"
-                  class="citation-regenerate"
-                  id="regenerateCitation"
-                >
-                  Buat Ulang
-                </button>
-              </div>
-            </section>
-
-            <!-- NOTIFIKASI SETELAH COPY -->
-            <div
-              class="citation-notification"
-              id="copyNotification"
-              role="status"
-              aria-live="polite"
-              hidden
-            >
-              <span>✓</span>
-
-              <p id="notificationText">
-                Berhasil disalin
-              </p>
-            </div>
-
-            <p
-              class="citation-notification-caption"
-              id="notificationCaption"
-              hidden
-            >
-              Contoh tampilan notifikasi setelah menyalin hasil
-            </p>
-
-            <!-- CATATAN PENTING -->
-            <div class="citation-note">
-              <p class="citation-step">
-                PENTING / PEDOMAN TETAP UTAMA
-              </p>
-
-              <p>
-                Format sitasi dan deklarasi dapat berbeda sesuai pedoman
-                kampus, dosen, jurnal, atau institusi. Hasil generator perlu
-                ditinjau dan tidak otomatis sesuai seluruh kebijakan akademik.
-              </p>
-
-              <small>
-                Contoh ini memakai tahun penggunaan dari input, bukan
-                verifikasi tanggal rilis model. Periksa metadata, URL,
-                dan aturan format sebelum digunakan.
-              </small>
-            </div>
           </div>
+
+          <small>
+            Periksa pedoman kampus atau dosen untuk format yang diminta.
+          </small>
         </div>
+
+        <!-- TOMBOL FORM -->
+        <div class="citation-buttons">
+
+          <button type="submit" class="citation-generate">
+            Generate Citation 
+            <span class="material-symbols-rounded tool-arrow" aria-hidden="true">arrow_forward</span>
+          </button>
+
+          <button type="reset" class="citation-reset">
+            Reset Form
+          </button>
+
+        </div>
+
+      </form>
+
+      <!-- BAGIAN KANAN: HASIL REFERENSI -->
+      <div class="citation-result-area">
+
+        <!-- TAMPILAN AWAL -->
+        <section class="citation-preview-card" id="academicPreview">
+
+          <p class="citation-step">
+            02 / REFERENCE PREVIEW
+          </p>
+
+          <h2>
+            Berikan Penghargaan<br />
+            pada Sumber Referensimu
+          </h2>
+
+          <p class="preview-description">
+            Referensi akademik membantu memperkuat pembahasan
+            dan menunjukkan sumber informasi yang kamu gunakan.
+          </p>
+
+          <div class="preview-steps">
+            <p>01 / Pilih jenis sumber referensi</p>
+            <p>02 / Masukkan informasi sumber</p>
+            <p>03 / Pilih format APA 7 atau IEEE</p>
+          </div>
+
+          <p class="preview-footer">
+            Isi formulir di samping untuk membuat referensimu.
+          </p>
+
+        </section>
+
+        <!-- TAMPILAN HASIL GENERATOR -->
+        <section
+          class="citation-result-card"
+          id="academicResult"
+          hidden
+        >
+
+          <p class="citation-step">
+            02 / HASIL GENERATOR
+          </p>
+
+          <h2>Hasil Sitasi Referensi</h2>
+
+          <p
+            class="citation-format-label"
+            id="academicFormatLabel"
+          >
+            FORMAT APA 7
+          </p>
+
+          <!-- DAFTAR PUSTAKA -->
+          <div class="citation-output">
+
+            <label for="academicReferenceText">
+              Daftar pustaka
+            </label>
+
+            <textarea
+              id="academicReferenceText"
+              class="academic-reference-text"
+              rows="6"
+              readonly
+              aria-label="Hasil daftar pustaka"
+            ></textarea>
+
+          </div>
+
+          <!-- SITASI DALAM TEKS -->
+          <div class="citation-output">
+
+            <label for="academicInTextCitation">
+              Sitasi dalam teks
+            </label>
+
+            <textarea
+              id="academicInTextCitation"
+              class="academic-intext-text"
+              rows="2"
+              readonly
+              aria-label="Hasil sitasi dalam teks"
+            ></textarea>
+
+          </div>
+
+          <p
+            class="citation-edit-hint"
+            id="academicResultNote"
+          >
+            Periksa kembali hasil sitasi sebelum digunakan.
+          </p>
+
+          <!-- TOMBOL COPY DAN REGENERATE -->
+          <div class="citation-result-buttons">
+
+            <button
+              type="button"
+              class="citation-copy"
+              id="academicCopy"
+            >
+              Copy Reference
+            </button>
+
+            <button
+              type="button"
+              class="citation-regenerate"
+              id="academicRegenerate"
+            >
+              Regenerate
+            </button>
+
+          </div>
+
+          <!-- TOMBOL SIMPAN FIREBASE -->
+          <button
+            type="button"
+            class="citation-save"
+            id="academicSave"
+            disabled
+          >
+            <i
+              data-lucide="cloud-upload"
+              class="icon-inline"
+              aria-hidden="true"
+            ></i>
+            Simpan Referensi
+          </button>
+
+          <p
+            id="academicSaveStatus"
+            class="citation-save-status"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+        </section>
+
+        <!-- NOTIFIKASI COPY -->
+        <div
+          class="citation-notification"
+          id="academicCopyNotification"
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+
+          <span>✓</span>
+
+          <p id="academicNotificationText">
+            Referensi berhasil disalin.
+          </p>
+
+        </div>
+
+        <!-- CATATAN PENTING -->
+        <div class="citation-note">
+
+          <p class="citation-step">
+            PENTING / PERIKSA SUMBER ASLI
+          </p>
+
+          <p>
+            Generator membantu menyusun format sitasi berdasarkan
+            informasi yang dimasukkan pengguna. Pastikan sumber
+            benar-benar tersedia, telah dibaca, dan seluruh
+            informasinya sudah diperiksa.
+          </p>
+
+          <small>
+            Hasil generator perlu disesuaikan kembali dengan
+            pedoman penulisan akademik yang berlaku.
+          </small>
+
+        </div>
+
       </div>
-    </section>
+
+    </div>
+
+  </div>
+
+</section>
+
 
     <!-- BAGIAN GENERATOR DEKLARASI AI -->
     <section class="decl-page page-view is-hidden" id="declaration" aria-labelledby="declPageTitle">
       <div class="decl-intro content-width">
         <p class="eyebrow">TUNJUKKAN PROSES PENGGUNAAN AI</p>
-        <h1 id="declPageTitle">Deklarasi Penggunaan AI</h1>
+        <h1 id="declPageTitle">AI Declaration Generator</h1>
         <p class="intro-copy">Ceritakan peran AI dalam tugasmu, Jelas, terbuka, dan tetap menjadi karyamu</p>
       </div>
 
@@ -982,10 +1009,10 @@
       <div class="content-width">
         <div class="decl-tabs" role="tablist" aria-label="Pilih jenis generator">
           <a href="#declaration" class="decl-tab is-active" role="tab" aria-selected="true">
-            Deklarasi Penggunaan AI
+            AI Declaration Generator
           </a>
           <a href="#generator" class="decl-tab" role="tab" aria-selected="false">
-            Sitasi AI
+            Academic Citation Generator
           </a>
         </div>
       </div>
@@ -1092,11 +1119,11 @@
 
             <div class="decl-form-actions">
               <button class="button button-coral decl-btn-full" type="submit">
-                Buat Pernyataan
+                Generate Declaration
                 <span class="material-symbols-rounded tool-arrow" aria-hidden="true">arrow_forward</span>
               </button>
               <button class="button button-outline decl-btn-full" id="resetDeclBtn" type="button">
-                Kosongkan Formulir
+                Reset Form
               </button>
             </div>
           </form>

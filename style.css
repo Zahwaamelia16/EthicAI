@@ -1124,7 +1124,7 @@ h1, h2, h3, p { overflow-wrap: break-word; }
    ========================================================= */
 
 .decl-page {
-  padding: 60px 0 70px;
+  padding: 69px 0 62px;
 }
 
 
@@ -4020,11 +4020,12 @@ button:focus-visible {
     font-size: 11px;
   }
 
-  .decl-intro {
-    padding: 23px 20px;
-    margin-bottom: 27px;
-    border-radius: 13px;
-  }
+    .citation-intro,
+    .decl-intro {
+      padding: 23px 20px;
+      margin-bottom: 27px;
+      border-radius: 13px;
+    }
 
   .decl-intro h1 {
     max-width: 100%;
@@ -4480,3 +4481,132 @@ button .tool-arrow {
   }
 }
 
+/* =========================================================
+   ETHICAI - ACADEMIC CITATION GENERATOR
+   Styling tambahan Generator Sitasi Referensi Akademik
+   ========================================================= */
+
+/* DROPDOWN JENIS SUMBER */
+
+.citation-field select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 14px;
+  border: 1px solid #dce4dd;
+  border-radius: 9px;
+  outline: none;
+  color: var(--green-text);
+  background: #fcfcf9;
+  font-family: var(--font);
+  font-size: 11px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.citation-field select:focus {
+  border-color: var(--green);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(7, 63, 54, .07);
+}
+
+/* LABEL HASIL REFERENSI */
+
+.citation-output > label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* KOTAK DAFTAR PUSTAKA DAN SITASI DALAM TEKS */
+
+.academic-reference-text,
+.academic-intext-text {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e1e7df;
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  color: var(--green-text);
+  background: var(--white);
+  font-family: var(--font);
+  font-size: 11px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.academic-reference-text {
+  min-height: 130px;
+}
+
+.academic-intext-text {
+  min-height: 65px;
+}
+
+.academic-reference-text:focus,
+.academic-intext-text:focus {
+  border-color: var(--green);
+}
+
+/* TOMBOL SIMPAN REFERENSI */
+
+.citation-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 43px;
+  padding: 11px 15px;
+  margin-top: 13px;
+  border: 1px solid var(--green);
+  border-radius: 9px;
+  color: var(--white);
+  background: var(--green);
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.citation-save:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--green-deep);
+}
+
+.citation-save:disabled {
+  cursor: not-allowed;
+  opacity: .65;
+}
+
+.citation-save .icon-inline {
+  width: 16px;
+  height: 16px;
+}
+
+/* STATUS PENYIMPANAN FIREBASE */
+
+.citation-save-status {
+  min-height: 17px;
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+/* RESPONSIVE HP */
+
+@media (max-width: 700px) {
+  .academic-reference-text {
+    min-height: 120px;
+  }
+
+  .citation-save {
+    min-height: 43px;
+  }
+}
