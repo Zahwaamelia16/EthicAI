@@ -1,5 +1,5 @@
 /*
- * EthicAI - AI Transparency Checklist
+ * EthicAI - Daftar Periksa Transparansi AI
  * Bagian yang dikerjakan: checklist 5 pertanyaan dan halaman hasil evaluasi.
  * Empat pertanyaan selain pertanyaan pertama disusun dari aspek yang muncul
  * pada desain halaman hasil: izin penggunaan, verifikasi, pemahaman ulang,
@@ -10,42 +10,42 @@ const questions = [
   {
     category: "TRANSPARANSI",
     title: "Apakah kamu mencantumkan penggunaan AI dalam tugas?",
-    description: "Sebutkan tool dan bentuk bantuan AI secara jelas.",
+    description: "Sebutkan alat AI dan bentuk bantuan yang diberikan secara jelas",
     habit: "Mengungkapkan penggunaan AI",
     improvementTitle: "Ungkapkan penggunaan AI",
-    improvementText: "Jelaskan tool AI yang kamu gunakan dan bagian tugas yang dibantu. Ikuti format pengungkapan yang diminta dosen atau institusi."
+    improvementText: "Jelaskan alat AI yang kamu gunakan dan bagian tugas yang dibantu, lalu ikuti format pengungkapan yang diminta dosen atau institusi"
   },
   {
     category: "KEPATUHAN",
     title: "Apakah penggunaan AI sudah sesuai dengan aturan dosen atau institusi?",
-    description: "Periksa pedoman tugas dan batas penggunaan AI yang diperbolehkan.",
+    description: "Periksa pedoman tugas dan batas penggunaan AI yang diperbolehkan",
     habit: "Memastikan penggunaan AI sesuai aturan",
     improvementTitle: "Pastikan izin penggunaan AI",
-    improvementText: "Kamu menjawab “Tidak” untuk kesesuaian aturan dosen atau institusi. Baca pedoman tugas, lalu konfirmasikan batas penggunaan AI kepada dosen sebelum menyerahkan tugas."
+    improvementText: "Kamu menjawab “Tidak” untuk kesesuaian aturan dosen atau institusi. Baca pedoman tugas, lalu konfirmasikan batas penggunaan AI kepada dosen sebelum menyerahkan tugas"
   },
   {
     category: "VERIFIKASI",
     title: "Apakah kamu memverifikasi informasi yang dihasilkan AI?",
-    description: "Bandingkan informasi dengan sumber tepercaya dan periksa kebenarannya.",
+    description: "Bandingkan informasi dengan sumber tepercaya dan periksa kebenarannya",
     habit: "Memverifikasi informasi dari AI",
     improvementTitle: "Verifikasi informasi dari AI",
-    improvementText: "Jangan langsung menggunakan jawaban AI. Periksa kembali fakta, data, dan referensi melalui sumber tepercaya sebelum memasukkannya ke tugas."
+    improvementText: "Jangan langsung menggunakan jawaban AI, periksa kembali fakta, data, dan referensi melalui sumber tepercaya sebelum memasukkannya ke tugas"
   },
   {
     category: "PEMAHAMAN",
     title: "Apakah kamu memahami dan mengolah kembali hasil dari AI?",
-    description: "Pastikan hasil AI kamu pahami, periksa, dan sesuaikan dengan pemikiranmu sendiri.",
+    description: "Pastikan hasil AI kamu pahami, periksa, dan sesuaikan dengan pemikiranmu sendiri",
     habit: "Memahami dan mengolah kembali hasil",
     improvementTitle: "Pahami dan olah kembali hasil AI",
-    improvementText: "Gunakan AI sebagai alat bantu belajar. Pelajari hasilnya, pastikan kamu memahami isinya, lalu tulis kembali dengan pemahamanmu sendiri."
+    improvementText: "Gunakan AI sebagai alat bantu belajar, pelajari hasilnya, pastikan kamu memahami isinya, lalu tulis kembali dengan pemahamanmu sendiri"
   },
   {
     category: "HAK CIPTA & SUMBER",
     title: "Apakah kamu memperhatikan hak cipta dan mencantumkan sumber?",
-    description: "Periksa penggunaan materi, kutipan, dan referensi yang disertakan dalam tugas.",
+    description: "Periksa penggunaan materi, kutipan, dan referensi yang disertakan dalam tugas",
     habit: "Memperhatikan hak cipta dan sumber",
     improvementTitle: "Perhatikan hak cipta dan sumber",
-    improvementText: "Periksa hak penggunaan materi yang kamu pakai. Cantumkan sumber yang relevan dan jangan menganggap seluruh keluaran AI sebagai referensi yang sudah terverifikasi."
+    improvementText: "Periksa hak penggunaan materi yang kamu pakai, cantumkan sumber yang relevan, dan jangan menganggap seluruh keluaran AI sebagai referensi yang sudah terverifikasi"
   }
 ];
 
@@ -115,7 +115,7 @@ function renderQuestion() {
   elements.nextButton.textContent = currentQuestion === questions.length - 1 ? "Lihat Hasil" : "Lanjut";
 
   if (answeredCount === questions.length) {
-    elements.helperText.textContent = "Semua pertanyaan sudah dijawab. Lihat ringkasan evaluasimu.";
+    elements.helperText.textContent = "Semua pertanyaan sudah dijawab, silakan lihat ringkasan evaluasimu";
   } else {
     elements.helperText.textContent = "Jawab seluruh pertanyaan untuk melihat ringkasan evaluasi";
   }
@@ -139,7 +139,7 @@ async function saveEvaluationToFirebase() {
 
   if (typeof window.simpanHasilEvaluasi !== "function") {
     console.error("Fungsi Firebase belum tersedia.");
-    showToast("Koneksi Firebase belum siap. Silakan muat ulang halaman.");
+    showToast("Koneksi Firebase belum siap, silakan muat ulang halaman");
     return;
   }
 
@@ -191,11 +191,11 @@ async function saveEvaluationToFirebase() {
     evaluationSaved = true;
 
     console.log("Evaluasi berhasil disimpan:", documentId);
-    showToast("Hasil evaluasi berhasil disimpan!");
+    showToast("Hasil evaluasi berhasil disimpan");
 
   } catch (error) {
     console.error("Gagal menyimpan evaluasi:", error);
-    showToast("Hasil evaluasi gagal disimpan. Periksa koneksi Firebase.");
+    showToast("Hasil evaluasi gagal disimpan, periksa koneksi Firebase");
 
   } finally {
     isSavingEvaluation = false;
@@ -206,30 +206,30 @@ function getScoreMessage(percentage) {
   if (percentage === 100) {
     return {
       heading: "Sangat baik,\nterus pertahankan",
-      description: "Kamu sudah menunjukkan kebiasaan transparansi AI yang baik. Tetap periksa kembali aturan tugas dan keakuratan seluruh isi sebelum dikumpulkan."
+      description: "Kamu sudah menunjukkan kebiasaan transparansi AI yang baik, tetap periksa aturan tugas dan keakuratan seluruh isi sebelum dikumpulkan"
     };
   }
   if (percentage >= 80) {
     return {
       heading: "Sudah baik,\nmasih bisa ditingkatkan",
-      description: "Kamu telah menerapkan sebagian besar kebiasaan transparansi AI. Pastikan penggunaan AI juga sesuai aturan tugasmu."
+      description: "Kamu telah menerapkan sebagian besar kebiasaan transparansi AI, pastikan penggunaannya juga sesuai aturan tugasmu"
     };
   }
   if (percentage >= 60) {
     return {
       heading: "Cukup baik,\nada yang perlu diperiksa",
-      description: "Beberapa kebiasaan transparansi AI sudah kamu terapkan. Tinjau kembali bagian yang masih terlewat sebelum menyerahkan tugas."
+      description: "Beberapa kebiasaan transparansi AI sudah kamu terapkan, tinjau kembali bagian yang masih terlewat sebelum menyerahkan tugas"
     };
   }
   if (percentage >= 40) {
     return {
       heading: "Masih perlu\nbeberapa perbaikan",
-      description: "Ada beberapa aspek penggunaan AI yang perlu kamu periksa. Gunakan rekomendasi di bawah sebagai panduan untuk memperbaiki proses pengerjaan tugas."
+      description: "Ada beberapa aspek penggunaan AI yang perlu kamu periksa, gunakan rekomendasi di bawah sebagai panduan untuk memperbaiki proses pengerjaan tugas"
     };
   }
   return {
     heading: "Saatnya meninjau\nproses penggunaan AI",
-    description: "Belum banyak kebiasaan transparansi AI yang kamu terapkan. Tidak apa-apa, mulai perbaiki prosesmu satu per satu sebelum tugas dikumpulkan."
+    description: "Belum banyak kebiasaan transparansi AI yang kamu terapkan, tidak apa-apa, mulai perbaiki prosesmu satu per satu sebelum tugas dikumpulkan"
   };
 }
 
@@ -251,7 +251,7 @@ function renderResult() {
   if (noIndexes.length === 0) {
     const completeMessage = document.createElement("div");
     completeMessage.className = "no-improvement";
-    completeMessage.textContent = "Tidak ada jawaban “Tidak”. Pertahankan kebiasaan transparansi dan tanggung jawab dalam menggunakan AI.";
+    completeMessage.textContent = "Tidak ada jawaban “Tidak”, pertahankan kebiasaan transparansi dan tanggung jawab dalam menggunakan AI";
     elements.improvementList.appendChild(completeMessage);
   } else {
     noIndexes.forEach((index) => {
@@ -273,7 +273,7 @@ function renderResult() {
   if (completedHabits.length === 0) {
     const emptyItem = document.createElement("li");
     emptyItem.className = "done-empty";
-    emptyItem.textContent = "Belum ada kebiasaan yang ditandai sudah dilakukan. Mulailah dari satu langkah kecil.";
+    emptyItem.textContent = "Belum ada kebiasaan yang ditandai sudah dilakukan, mulailah dari satu langkah kecil";
     elements.doneList.appendChild(emptyItem);
   } else {
     completedHabits.forEach((question) => {
@@ -298,7 +298,7 @@ function renderResult() {
 
 function showResult() {
   if (answers.some((answer) => answer === null)) {
-    showToast("Lengkapi semua pertanyaan terlebih dahulu.");
+    showToast("Lengkapi seluruh pertanyaan terlebih dahulu");
     return;
   }
 
@@ -473,7 +473,7 @@ if (window.lucide) {
     const year = data.date.slice(0, 4);
 
     let citation =
-      `${author}. (${year}). ${title} [Large language model].`;
+      `${author}. (${year}). ${title} [Model bahasa besar].`;
 
     if (data.url) {
       citation += ` ${data.url}`;
@@ -490,13 +490,13 @@ if (window.lucide) {
       ? `${data.toolName} (${data.version})`
       : data.toolName;
 
-    const accessDate = formatEnglishDate(data.date);
+    const accessDate = formatIndonesianDate(data.date);
 
     let citation =
-      `[1] ${title}, ${author}. Accessed: ${accessDate}. [Online].`;
+      `[1] ${title}, ${author}. Diakses: ${accessDate}. [Daring].`;
 
     if (data.url) {
-      citation += ` Available: ${data.url}`;
+      citation += ` Tersedia: ${data.url}`;
     }
 
     return citation;
@@ -523,10 +523,10 @@ if (window.lucide) {
     citationText.value = result;
 
     resultFormat.textContent =
-      `FORMAT ${data.format} · CONTOH BERDASARKAN INPUT`;
+      `FORMAT ${data.format} · CONTOH BERDASARKAN ISIAN`;
 
     usageNote.textContent =
-      `Catatan penggunaan: ${formatIndonesianDate(data.date)}; ${data.purpose}`;
+      `Keterangan penggunaan: ${formatIndonesianDate(data.date)}; ${data.purpose}`;
 
     // Menampilkan card hasil
     previewContent.hidden = true;
@@ -561,20 +561,20 @@ if (window.lucide) {
 
       console.log("Sitasi berhasil disimpan:", documentId);
 
-      showToast("Sitasi berhasil disimpan ke database!");
+      showToast("Sitasi berhasil disimpan ke basis data");
 
     } catch (error) {
 
       console.error("Gagal menyimpan sitasi:", error);
 
-      showToast("Sitasi berhasil dibuat, tetapi gagal disimpan ke database.");
+      showToast("Sitasi berhasil dibuat, tetapi gagal disimpan ke basis data");
 
     }
 
   }
 
 
-  // Tombol Generate Citation
+  // Tombol Buat Sitasi
   citationForm.addEventListener("submit", function(event) {
 
     event.preventDefault();
@@ -582,14 +582,14 @@ if (window.lucide) {
 
   });
 
-  // Tombol Regenerate
+  // Tombol Buat Ulang
   regenerateButton.addEventListener("click", function() {
 
     createCitation();
 
   });
 
-  // Tombol Copy Citation
+  // Tombol Salin Sitasi
   copyButton.addEventListener("click", async function() {
 
     const text = citationText.value.trim();
@@ -625,12 +625,12 @@ if (window.lucide) {
       }
 
       notificationText.textContent =
-        "Berhasil disalin ke clipboard";
+        "Berhasil disalin";
 
     } catch (error) {
 
       notificationText.textContent =
-        "Gagal menyalin. Silakan salin secara manual.";
+        "Gagal menyalin, silakan salin secara manual";
 
     }
 
@@ -644,7 +644,7 @@ if (window.lucide) {
   });
 
 
-  // Tombol Reset Form
+  // Tombol Kosongkan Formulir
   citationForm.addEventListener("reset", function() {
 
     setTimeout(function() {
@@ -799,7 +799,7 @@ if (window.lucide) {
   const regenerateBtn = document.getElementById("regenerateDeclBtn");
   const copyBadge = document.getElementById("declCopyBadge");
 
-  const styleOrder = ["standard", "formal", "english"];
+  const styleOrder = ["standard", "formal", "concise"];
   let currentStyle = "standard";
 
   function openDeclarationPage(event) {
@@ -840,7 +840,7 @@ if (window.lucide) {
   // Buka halaman Deklarasi saat tombol "Buat Deklarasi AI" di halaman hasil diklik
   window.addEventListener("ethicai:open-generator", openDeclarationPage);
 
-  // Buka halaman Deklarasi saat tab "AI Declaration Generator" diklik
+  // Buka halaman Deklarasi saat tab "Pembuat Pernyataan Penggunaan AI" diklik
   document.addEventListener("click", (event) => {
     const declLink = event.target.closest('a[href="#declaration"]');
     if (declLink) {
@@ -893,12 +893,12 @@ if (window.lucide) {
     sampleBtn.addEventListener("click", () => {
       document.getElementById("aiTools").value = "ChatGPT, Gemini";
       document.getElementById("aiPurpose").value = "memahami konsep dasar materi dan mengeksplorasi sudut pandang awal";
-      document.getElementById("aiAssistance").value = "brainstorming ide, penyusunan kerangka, penyuntingan tata bahasa";
+      document.getElementById("aiAssistance").value = "curah gagasan, penyusunan kerangka, penyuntingan tata bahasa";
       document.getElementById("taskPart").value = "penyusunan kerangka Bab 1 dan pengecekan kejelasan abstrak";
       document.getElementById("humanReview").value = "Saya memverifikasi seluruh fakta dan referensi melalui jurnal akademik serta menulis ulang seluruh isi dengan bahasa sendiri";
 
       if (typeof showToast === "function") {
-        showToast("Contoh pengisian berhasil dimuat.");
+        showToast("Contoh pengisian berhasil dimuat");
       }
     });
   }
@@ -907,7 +907,7 @@ if (window.lucide) {
   async function saveDeclarationToFirebase() {
     if (typeof window.simpanHasilDeklarasi !== "function") {
       console.error("Fungsi Firebase simpanHasilDeklarasi belum tersedia.");
-      showToast("Koneksi Firebase belum siap.");
+      showToast("Koneksi Firebase belum siap");
       return;
     }
 
@@ -930,10 +930,10 @@ if (window.lucide) {
     try {
       const documentId = await window.simpanHasilDeklarasi(declarationData);
       console.log("Deklarasi berhasil disimpan:", documentId);
-      showToast("Deklarasi berhasil disimpan ke database!");
+      showToast("Pernyataan penggunaan AI berhasil disimpan ke basis data");
     } catch (error) {
       console.error("Gagal menyimpan deklarasi:", error);
-      showToast("Deklarasi berhasil dibuat, tetapi gagal disimpan ke database.");
+      showToast("Pernyataan berhasil dibuat, tetapi gagal disimpan ke basis data");
     }
   }
 
@@ -972,19 +972,19 @@ if (window.lucide) {
 
     const templates = {
       standard: {
-        p1: `Saya menggunakan ${tools} untuk ${purpose}. Bantuan AI mencakup ${assistance}, khususnya pada bagian ${taskPart}.`,
-        p2: `${review}. Saya bertanggung jawab atas isi, keakuratan, dan orisinalitas tugas akhir ini.`,
-        note: "Tinjau dan sesuaikan sebelum dimasukkan ke tugas"
+        p1: `Saya menggunakan ${tools} untuk ${purpose}, dengan bantuan berupa ${assistance} pada bagian ${taskPart}`,
+        p2: `${review}; saya tetap bertanggung jawab atas isi, keakuratan, dan orisinalitas tugas akhir ini`,
+        note: "Periksa kembali dan sesuaikan dengan proses penggunaan AI yang sebenarnya"
       },
       formal: {
-        p1: `Pernyataan Penggunaan Kecerdasan Buatan: Dalam penyusunan karya akademik ini, penulis memanfaatkan ${tools} guna ${purpose}, dengan bentuk bantuan berupa ${assistance} pada bagian ${taskPart}.`,
-        p2: `${review}. Seluruh substansi, validasi sumber ilmiah, serta keaslian karya ini sepenuhnya menjadi tanggung jawab akademik penulis.`,
-        note: "Sesuaikan dengan format pernyataan akademik dosen atau kampus"
+        p1: `Dalam penyusunan karya akademik ini, saya memanfaatkan ${tools} untuk ${purpose}, dengan bentuk bantuan berupa ${assistance} pada bagian ${taskPart}`,
+        p2: `${review}; seluruh isi, validasi sumber ilmiah, dan keaslian karya ini tetap menjadi tanggung jawab saya`,
+        note: "Sesuaikan pernyataan ini dengan pedoman akademik dosen atau kampus"
       },
-      english: {
-        p1: `AI Usage Declaration: During the preparation of this work, the author used ${tools} to ${purpose}, specifically for ${assistance} in ${taskPart}.`,
-        p2: `${review}. After using this tool, the author reviewed and edited the content as needed and takes full responsibility for the accuracy and originality of the final work.`,
-        note: "Review and adapt to match your course or institutional guidelines"
+      concise: {
+        p1: `Saya menggunakan ${tools} untuk ${purpose} dan memanfaatkan bantuan ${assistance} pada bagian ${taskPart}`,
+        p2: `${review}; saya telah meninjau hasilnya dan bertanggung jawab atas isi tugas akhir ini`,
+        note: "Sesuaikan dengan proses penggunaan AI yang sebenarnya"
       }
     };
 

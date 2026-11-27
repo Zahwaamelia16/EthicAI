@@ -2723,3 +2723,229 @@ h1, h2, h3, p { overflow-wrap: break-word; }
   color: var(--white);
   background: var(--green);
 }
+
+/* =====================================================
+   ETHICAI - DESIGN POLISH & STICKY NAVBAR
+   ===================================================== */
+
+/* 1. STICKY NAVBAR */
+.site-header,
+.site-header.home-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: var(--green);
+  box-shadow: 0 5px 22px rgba(4, 35, 29, 0.13);
+  isolation: isolate;
+}
+
+/* 2. NAVBAR HOVER EFFECT */
+.main-nav a {
+  font-size: 11.5px;
+  transition: color 0.25s ease;
+}
+
+.main-nav a::after {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* BRAND */
+.brand {
+  transition: opacity 0.2s ease;
+}
+
+.brand:hover {
+  opacity: 0.85;
+}
+
+/* 3. BUTTON POLISH */
+.header-cta {
+  box-shadow: 0 4px 12px rgba(255, 139, 120, 0.15);
+}
+
+.header-cta:hover {
+  box-shadow: 0 7px 18px rgba(255, 139, 120, 0.23);
+}
+
+/* 4. GUIDE INTRODUCTION */
+.guide-intro {
+  padding-top: 62px;
+  padding-bottom: 62px;
+}
+
+.guide-intro h1 {
+  font-size: clamp(38px, 4.5vw, 50px);
+  line-height: 1.16;
+  letter-spacing: -1.8px;
+}
+
+.guide-intro > p:not(.home-eyebrow) {
+  max-width: 720px;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.guide-meta {
+  display: inline-block;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  letter-spacing: 0.8px;
+}
+
+/* 5. GUIDE TOOLS SECTION */
+.guide-tools {
+  padding-top: 10px;
+  padding-bottom: 75px;
+}
+
+.guide-tools h2 {
+  font-size: clamp(27px, 3.2vw, 35px);
+  letter-spacing: -1px;
+}
+
+.guide-section-description {
+  max-width: 850px;
+  margin-bottom: 27px;
+  font-size: 11.5px;
+  line-height: 1.9;
+}
+
+/* 6. GUIDE CARDS */
+.guide-tool-grid {
+  gap: 18px;
+}
+
+.guide-tool-card {
+  min-height: 170px;
+  padding: 23px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 5px 18px rgba(7, 63, 54, 0.045);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.guide-tool-card:hover {
+  transform: translateY(-5px);
+  border-color: #b9cec2;
+  box-shadow: 0 12px 26px rgba(7, 63, 54, 0.09);
+}
+
+.guide-tool-card h3 {
+  margin-bottom: 13px;
+  font-size: 17px;
+}
+
+.guide-tool-card p {
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+/* 7. CARD LAINNYA */
+.guide-case-card,
+.guide-verification-list article,
+.guide-dos-card,
+.guide-donts-card {
+  border-radius: 13px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.guide-case-card:hover,
+.guide-verification-list article:hover,
+.guide-dos-card:hover,
+.guide-donts-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 22px rgba(7, 63, 54, 0.07);
+}
+
+/* 8. SCROLL OFFSET NAVBAR */
+html {
+  scroll-padding-top: 100px;
+}
+
+#top,
+#panduan,
+#checklist,
+#generator,
+#declaration,
+#tentang {
+  scroll-margin-top: 100px;
+}
+
+/* 9. FOCUS ACCESSIBILITY */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 4px;
+}
+
+/* 10. RESPONSIVE MOBILE */
+@media (max-width: 700px) {
+  .site-header,
+  .site-header.home-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--green);
+  }
+
+  .guide-intro {
+    padding-top: 43px;
+    padding-bottom: 48px;
+  }
+
+  .guide-intro h1 {
+    font-size: clamp(32px, 8vw, 42px);
+    letter-spacing: -1.2px;
+  }
+
+  .guide-intro > p:not(.home-eyebrow) {
+    font-size: 11px;
+  }
+
+  .guide-tools {
+    padding-bottom: 48px;
+  }
+
+  .guide-tool-card {
+    min-height: auto;
+    padding: 21px;
+  }
+
+  html {
+    scroll-padding-top: 125px;
+  }
+
+  #top,
+  #panduan,
+  #checklist,
+  #generator,
+  #declaration,
+  #tentang {
+    scroll-margin-top: 125px;
+  }
+}
+
+/* 11. REDUCE MOTION WHEN REQUESTED */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
